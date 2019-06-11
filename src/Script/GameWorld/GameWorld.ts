@@ -47,7 +47,7 @@ export default class GameWorld extends ui.GameWorldUI{
     private gameDataInit() : void
     {
         this.worldEventManager = new WorldEventManager();
-        this.peopleManager = new PeopleManager();
+        this.peopleManager = new PeopleManager(this.sp_scene);
         this.uiManager = new UIManager(this.sp_UI);
         this.msgDialog = new MsgDialog();      
         this.mousePos = {};

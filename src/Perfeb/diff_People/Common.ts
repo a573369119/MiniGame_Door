@@ -1,8 +1,8 @@
 import People from "../People";
 
-export default class CommonMan extends People{
+export default class Common extends People{
 
-    constructor(view,type:number,isOut){
+    constructor(view,type:string,isOut){
         super(view,type,isOut);
     }
 }
