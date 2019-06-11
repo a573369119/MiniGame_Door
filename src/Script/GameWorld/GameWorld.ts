@@ -57,9 +57,9 @@ export default class GameWorld extends ui.GameWorldUI{
     /**添加事件 */
     private addEvent() : void
     {
-        Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.mouseDown);
-        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
-        Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);
+        this.sp_scene.on(Laya.Event.MOUSE_DOWN,this,this.mouseDown);
+        this.sp_scene.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
+        this.sp_scene.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);
         //给门帮点点击事   
         this.sp_door.on(Laya.Event.CLICK,this,this.doorCtr);
         //医馆事件绑定
