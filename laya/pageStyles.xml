@@ -1,3 +1,5 @@
 <page>
    <item name="GameWorld.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="Dialog/BeCurrent.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="Dialog/CurrentDialog.scene" props="" ifExport="分离模式" aName=""/>
 </page>
