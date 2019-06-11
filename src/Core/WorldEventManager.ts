@@ -17,4 +17,5 @@ export default class WorldEventManager {
 
     /**事件发生器 */
 
+    
 }

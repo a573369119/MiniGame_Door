@@ -11,7 +11,6 @@ export default class OpenStory extends Laya.Script{
 
     onClick() : void
     {
-        console.log(this);
         Laya.Scene.open("GameStory.scene");
     }
 }

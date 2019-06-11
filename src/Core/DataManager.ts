@@ -1,8 +1,8 @@
 /**
- * 国家数据中心 所有的关于国家的数据
+ * 数据中心 所有的数据
  */
 export default class CountryData{
-
+    public static ins_ : CountryData = new CountryData();
     /**************主数据********************/
     /**国家财政 */
     public gold : number;
@@ -54,8 +54,6 @@ export default class CountryData{
     /**特殊门 筛查 1-防止进入   2-邀请进入*/
     // public keepSelect : Array<number> = [];
 
-
-
     constructor(){
 
     }
@@ -84,5 +82,9 @@ export default class CountryData{
     }
 
     /**数据结算  综合计算所有的数值*/
+    // private 
+
+
 
 }
+

@@ -11,7 +11,6 @@ export default class OpenGame extends Laya.Script{
 
     onClick() : void
     {
-        console.log(this);
         Laya.Scene.open("GameWorld.scene");
     }
 }
