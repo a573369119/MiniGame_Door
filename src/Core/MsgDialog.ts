@@ -25,7 +25,7 @@ export default class MsgDialog extends ui.Dialog.CurrentDialogUI{
         this.changeTitle();
         this.changeWord(); 
         this.msgBody.x = -1200;       
-        Laya.Tween.to(this.msgBody,{x:(900/(Laya.Browser.clientHeight/Laya.Browser.clientWidth)-1163)/2},200);
+        Laya.Tween.to(this.msgBody,{x:(900/(Laya.Browser.clientHeight/Laya.Browser.clientWidth)-1163)/2},200,Laya.Ease.backOut);
         
     }
 
@@ -54,7 +54,11 @@ export default class MsgDialog extends ui.Dialog.CurrentDialogUI{
     public closeDialog() : void
     {
         this.btn_close.off(Laya.Event.CLICK,this,this.closeDialog);                
-        this.visible = false;
-        Laya.Tween.to(this.msgBody,{x:-1200},200);        
+        Laya.Tween.to(this.msgBody,{x:-1200},200,Laya.Ease.backOut,Laya.Handler.create(this,this.closeOver));        
+    }
+
+    private closeOver() : void
+    {
+        this.visible = false;        
     }
 }
