@@ -40,7 +40,7 @@ export default class CountryData{
     /**土匪 -S */
     public bandit : number;
     /**盗贼 -A */
-    public robbers : number;
+    public robber : number;
     
     //--------城门
     /**门是否打开*/
@@ -53,6 +53,8 @@ export default class CountryData{
     public preparation : number;
     /**特殊门 筛查 1-防止进入   2-邀请进入*/
     // public keepSelect : Array<number> = [];
+    /**流动比例 */
+    public percent:number=1;
 
     constructor(){
 
@@ -78,7 +80,7 @@ export default class CountryData{
     public get_ProfessionPercent(type:string) : number
     {
         if(this[type] === undefined) console.log("不存在该人种");
-        else return this[type]/(this.commonMan + this.scientist + this.star + this.bandit + this.robbers);
+        else return this[type]/(this.commonMan + this.scientist + this.star + this.bandit + this.robber);
     }
 
     /**数据结算  综合计算所有的数值*/
@@ -88,3 +90,12 @@ export default class CountryData{
 
 }
 
+/**外城 */
+export class OutCountryData{
+    public static ins_ : OutCountryData = new OutCountryData();
+    /**************主数据********************/
+    /**最大外城容纳数量 */
+    public maxCount : number=10;
+    /**当前外城人口数 */
+    public outCount:number=0;
+}
