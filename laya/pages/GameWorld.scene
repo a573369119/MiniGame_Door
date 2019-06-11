@@ -1,9 +1,10 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":2,
+    "selectedBox":25,
+    "selecteID":19,
     "searchKey":"Scene",
-    "props":{"width":1440,"sceneColor":"#000000","runtime":"Script/GameWorld/GameManager.ts","height":900},
+    "props":{"width":1440,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
     "nodeParent":-1,
     "maxID":57,
     "label":"Scene",
@@ -20,13 +21,14 @@
             "props":{"width":2000,"var":"sp_scene","height":900},
             "nodeParent":2,
             "label":"sp_scene",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":8,
             "child":[
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,sp_ground",
                     "props":{"y":0,"x":0,"width":2000,"var":"sp_ground","texture":"map/ground.png","height":900},
@@ -40,6 +42,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,sp_river",
                     "props":{"y":400,"x":0,"var":"sp_river","texture":"map/water.png"},
@@ -53,6 +56,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,sp_wall",
                     "props":{"y":450,"x":0,"width":2000,"var":"sp_wall","texture":"map/wall.png","pivotY":10,"height":20},
@@ -66,6 +70,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,sp_door",
                     "props":{"y":412.5,"x":1000,"width":137,"var":"sp_door","texture":"map/bridge.png","pivotY":62,"pivotX":69,"height":123},
@@ -79,18 +84,20 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,house",
-                    "props":{"y":0,"x":0,"width":1999,"var":"house","height":899},
+                    "props":{"y":1,"x":1,"width":1999,"var":"house","height":899},
                     "nodeParent":8,
                     "label":"house",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":25,
                     "child":[
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_1",
                             "props":{"y":541,"x":840,"var":"house_1","texture":"map/house.png"},
@@ -104,6 +111,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_2",
                             "props":{"y":641,"x":1194,"var":"house_2","texture":"map/house.png"},
@@ -117,6 +125,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_3",
                             "props":{"y":541,"x":720,"var":"house_3","texture":"map/house.png"},
@@ -130,6 +139,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_4",
                             "props":{"y":547,"x":1194,"var":"house_4","texture":"map/house.png"},
@@ -143,6 +153,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_5",
                             "props":{"y":641,"x":840,"var":"house_5","texture":"map/house.png"},
@@ -156,6 +167,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_6",
                             "props":{"y":641,"x":1088,"var":"house_6","texture":"map/house.png"},
@@ -169,6 +181,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_8",
                             "props":{"y":547,"x":1088,"var":"house_8","texture":"map/house.png"},
@@ -182,6 +195,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_9",
                             "props":{"y":641,"x":720,"var":"house_9","texture":"map/house.png"},
@@ -195,11 +209,12 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,house_10",
-                            "props":{"y":730,"x":607,"var":"house_10","texture":"map/house.png"},
+                            "searchKey":"Sprite,eventHouse",
+                            "props":{"y":729,"x":591.5,"width":80,"var":"eventHouse","texture":"map/house.png","height":142},
                             "nodeParent":25,
-                            "label":"house_10",
+                            "label":"eventHouse",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
@@ -208,6 +223,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_11",
                             "props":{"y":641,"x":607,"var":"house_11","texture":"map/house.png"},
@@ -221,6 +237,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_12",
                             "props":{"y":541,"x":607,"var":"house_12","texture":"map/house.png"},
@@ -234,6 +251,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_13",
                             "props":{"y":730,"x":1289,"var":"house_13","texture":"map/house.png"},
@@ -247,6 +265,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_14",
                             "props":{"y":641,"x":1289,"var":"house_14","texture":"map/house.png"},
@@ -260,6 +279,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_15",
                             "props":{"y":547,"x":1289,"var":"house_15","texture":"map/house.png"},
@@ -273,6 +293,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,palace",
                             "props":{"y":730,"x":719,"width":524,"var":"palace","texture":"map/house.png","height":174},
@@ -286,6 +307,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,hospital",
                             "props":{"y":541,"x":389,"width":148,"var":"hospital","texture":"map/house.png","height":148},
@@ -299,19 +321,7 @@
                                 ]
                         },
                         {
-                            "type":"Sprite",
-                            "searchKey":"Sprite,house_16",
-                            "props":{"y":816,"x":607,"var":"house_16","texture":"map/house.png"},
-                            "nodeParent":25,
-                            "label":"house_16",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":30,
-                            "child":[
-                                ]
-                        },
-                        {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_17",
                             "props":{"y":730,"x":488,"var":"house_17","texture":"map/house.png"},
@@ -325,6 +335,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_18",
                             "props":{"y":816,"x":488,"var":"house_18","texture":"map/house.png"},
@@ -338,6 +349,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_19",
                             "props":{"y":730,"x":389,"var":"house_19","texture":"map/house.png"},
@@ -351,6 +363,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_20",
                             "props":{"y":816,"x":389,"var":"house_20","texture":"map/house.png"},
@@ -364,6 +377,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,technology",
                             "props":{"y":547,"x":1392,"width":148,"var":"technology","texture":"map/house.png","height":148},
@@ -377,6 +391,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_0",
                             "props":{"y":816,"x":1289,"var":"house_0","texture":"map/house.png"},
@@ -390,6 +405,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_21",
                             "props":{"y":730,"x":1392,"var":"house_21","texture":"map/house.png"},
@@ -403,6 +419,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_22",
                             "props":{"y":816,"x":1392,"var":"house_22","texture":"map/house.png"},
@@ -416,6 +433,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_23",
                             "props":{"y":729,"x":1491,"var":"house_23","texture":"map/house.png"},
@@ -429,6 +447,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_24",
                             "props":{"y":816,"x":1491,"var":"house_24","texture":"map/house.png"},
@@ -442,6 +461,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_25",
                             "props":{"y":541,"x":277,"var":"house_25","texture":"map/house.png"},
@@ -455,6 +475,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_26",
                             "props":{"y":640,"x":277,"var":"house_26","texture":"map/house.png"},
@@ -468,6 +489,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_27",
                             "props":{"y":730,"x":277,"var":"house_27","texture":"map/house.png"},
@@ -481,6 +503,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_28",
                             "props":{"y":816,"x":277,"var":"house_28","texture":"map/house.png"},
@@ -494,6 +517,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,farm",
                             "props":{"y":541,"x":21,"width":221,"var":"farm","texture":"map/house.png","height":335},
@@ -507,6 +531,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_30",
                             "props":{"y":547,"x":1585,"var":"house_30","texture":"map/house.png"},
@@ -520,6 +545,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_31",
                             "props":{"y":646,"x":1585,"var":"house_31","texture":"map/house.png"},
@@ -533,6 +559,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_32",
                             "props":{"y":729,"x":1585,"var":"house_32","texture":"map/house.png"},
@@ -546,6 +573,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_33",
                             "props":{"y":816,"x":1585,"var":"house_33","texture":"map/house.png"},
@@ -559,6 +587,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_34",
                             "props":{"y":646,"x":1688,"var":"house_34","texture":"map/house.png"},
@@ -572,6 +601,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_35",
                             "props":{"y":547,"x":1688,"var":"house_35","texture":"map/house.png"},
@@ -585,6 +615,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_36",
                             "props":{"y":730,"x":1688,"var":"house_36","texture":"map/house.png"},
@@ -598,6 +629,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_37",
                             "props":{"y":816,"x":1688,"var":"house_37","texture":"map/house.png"},
@@ -611,6 +643,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,army",
                             "props":{"y":547,"x":1777,"width":194,"var":"army","texture":"map/house.png","height":319},
@@ -625,6 +658,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"y":620,"x":729,"texture":"map/people.png"},
