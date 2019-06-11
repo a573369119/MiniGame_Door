@@ -16,10 +16,12 @@ export default class GameWorld extends ui.GameWorldUI{
     /**UI管理器 */
     private uiManager : UIManager;
 
-
     //-------------------------------
     /**门是否打开 */
     private isOpen : boolean;
+    /**屏幕宽度 */
+    private screenWidth : number;
+
 
     constructor(){
         super();
@@ -28,7 +30,8 @@ export default class GameWorld extends ui.GameWorldUI{
     onEnable(): void
     {
         this.gameDataInit();//游戏变量初始化
-        this.addEvent();//给桥添加事件  
+        this.addEvent();//给桥添加事件 
+        this.screenSetting();//屏幕居中
         this.gameStart();//游戏流程开始
     }
 
@@ -45,6 +48,13 @@ export default class GameWorld extends ui.GameWorldUI{
     {
         //给门帮点点击事   
         this.sp_door.on(Laya.Event.CLICK,this,this.doorCtr);
+    }
+
+    /**屏幕 局中*/
+    private screenSetting() : void
+    {
+        this.screenWidth = 900/(Laya.Browser.clientHeight/Laya.Browser.clientWidth);//屏幕高度
+        console.log("width" + this.screenWidth);
     }
 
     /**门的开关 */
