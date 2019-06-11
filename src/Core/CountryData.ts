@@ -1,9 +1,8 @@
 /**
  * 国家数据中心 所有的关于国家的数据
  */
-export default class CountryData {
-    /**国家数据中心 */
-    public static ins_ : CountryData = new CountryData();
+export default class CountryData{
+
     /**************主数据********************/
     /**国家财政 */
     public gold : number;
@@ -58,8 +57,12 @@ export default class CountryData {
 
 
     constructor(){
+
     }
 
+    onEnable(){
+
+    }
 
     /**
      * 获取人口流量 :
