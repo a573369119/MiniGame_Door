@@ -1,17 +1,10 @@
 {
     "x":0,
     "type":"Scene",
-<<<<<<< HEAD
-    "selectedBox":8,
-    "selecteID":56,
-    "searchKey":"Scene",
-    "props":{"width":1440,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
-=======
     "selectedBox":2,
     "selecteID":25,
     "searchKey":"Scene",
     "props":{"width":2000,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
->>>>>>> c2732eb4aebe80eb23f1a83ea11e1a0d4f751f91
     "nodeParent":-1,
     "maxID":57,
     "label":"Scene",
@@ -663,8 +656,6 @@
                             "child":[
                                 ]
                         }]
-<<<<<<< HEAD
-=======
                 },
                 {
                     "x":30,
@@ -679,7 +670,6 @@
                     "compId":56,
                     "child":[
                         ]
->>>>>>> c2732eb4aebe80eb23f1a83ea11e1a0d4f751f91
                 }]
         },
         {

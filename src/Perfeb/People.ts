@@ -115,7 +115,7 @@ export default class People {
     private checkLimit_Out():void
     {
         //边界检测
-        if(this.sp.x<-20||this.sp.x>2020||this.sp.y<-20)
+        if(this.sp.x<-5||this.sp.x>2005||this.sp.y<-5)
         {
             Laya.Pool.recover(this.type,this);
             OutCountryData.ins_.outCount--;

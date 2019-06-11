@@ -95,7 +95,7 @@ export default class PeopleManager {
     /*************************************界限检测 **********************/
     
     
-    private checkPercent(people,type:string):void
+    public checkPercent(people,type:string):void
     {
         //流动比例检测
         if(CountryData.ins_.percent<1)
