@@ -18,12 +18,15 @@ export default class People {
     public isOut : boolean;
     /**人属性 */
     public type:string;
+    /**人的朝向 */
+    public toward : any;
 
     constructor(view,type:string,isOut){
         this.view = view;
         this.isOut = isOut;
         this.type=type;
         this.init(type);
+        this.toward = {x:0,y:0};
     }
 
     /**初始化 */
@@ -45,6 +48,7 @@ export default class People {
         else
         {
             this.people_PosInner();
+            Laya.timer.loop(16,this,this.people_PosInner);
         }
     }
 
@@ -75,7 +79,7 @@ export default class People {
         this.sp.y = y;
     }
 
-    /**墙外人行动逻辑*/
+    /******************************墙外人行动逻辑*******************************************/
     private people_PosOut() : void
     {
         //给予随机方向，方向用(-1~1)表示
@@ -104,7 +108,7 @@ export default class People {
         Laya.timer.frameOnce(time*60,this,this.people_PosOut);
     }
     
-    /**墙内人行动逻辑*/
+    /********************************************************墙内人行动逻辑*****************************************/
     private people_PosInner() : void
     {
 
@@ -130,10 +134,14 @@ export default class People {
                 this.dirY=-Math.random();
         }
     }
+
     /**人消失 */
     private destoryPeople() : void
     {
         this.sp.visible = false;
-        
+        Laya.timer.clear(this,this.checkLimit_Out);
+        Laya.timer.clear(this,this.people_PosOut);
+        Laya.timer.clear(this,this.people_PosInner);
+        Laya.timer.clear(this,this.moveDistance);        
     }
 }

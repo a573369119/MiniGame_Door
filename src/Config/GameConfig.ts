@@ -3,6 +3,13 @@ export default class GameConfig {
     public static COMMON_MAN : string = "common";
     /**人种 - 小偷 */
     public static ROBBER_MAN : string = "robber";
+    /**人种 - 科学家 */
+    public static SCIENTIST_MAN : string = "scientist";
+    /**人种 - 明星 */
+    public static STAR_MAN : string = "star";    
+    /**人种 - 土匪 */
+    public static BANDIT_MAN : string = "bandit";    
+
 
 
 
