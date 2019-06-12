@@ -71,7 +71,7 @@ export default class GameWorld extends ui.GameWorldUI{
         //科技馆事件绑定
         this.technology.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.TECHNOLOGY]);        
         //新闻点事件绑定
-        this.eventHouse.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.EVENT_HOUSE]);     
+        //this.eventHouse.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.EVENT_HOUSE]);     
         //新闻皇宫绑定
         this.palace.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.PALACE]);           
     }

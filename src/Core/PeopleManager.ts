@@ -37,7 +37,7 @@ export default class PeopleManager {
         /**生成不同人种的几率 */
         let random=Math.floor(Math.random()*100);
         //普通人
-        if(random>=0&&random<85)
+        if(random>=0&&random<80)
         {
             people =Laya.Pool.getItem("common");
             if(!people)
@@ -46,12 +46,39 @@ export default class PeopleManager {
             }
         }
         //小偷
-        else if(random>=85&&random<100)
+        else if(random>=80&&random<90)
         {
             people =Laya.Pool.getItem("robber");
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.ROBBER_MAN,true);
+            }
+        }
+        //土匪
+        else if(random>=90&&random<96)
+        {
+            people =Laya.Pool.getItem("bandit");
+            if(!people)
+            {
+                people =new Robber(this.view,GameConfig.BANDIT_MAN,true);
+            }
+        }
+        //科学家
+        else if(random>=96&&random<99)
+        {
+            people =Laya.Pool.getItem("scientist");
+            if(!people)
+            {
+                people =new Robber(this.view,GameConfig.SCIENTIST_MAN,true);
+            }
+        }
+        //明星
+        else
+        {
+            people =Laya.Pool.getItem("star");
+            if(!people)
+            {
+                people =new Robber(this.view,GameConfig.STAR_MAN,true);
             }
         }
         people.visible=true;

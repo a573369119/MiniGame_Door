@@ -1,5 +1,5 @@
 import GameConfig from "../Config/GameConfig";
-import { OutCountryData } from "../Core/DataManager";
+import CountryData, { OutCountryData } from "../Core/DataManager";
 
 /**
  * 
@@ -117,6 +117,7 @@ export default class People {
         //边界检测
         if(this.sp.x<-5||this.sp.x>2005||this.sp.y<-5)
         {
+            this.destoryPeople();
             Laya.Pool.recover(this.type,this);
             OutCountryData.ins_.outCount--;
         }
@@ -129,11 +130,21 @@ export default class People {
                 this.dirX=Math.random()*2-1;
                 this.dirY=-Math.random();
         }
+
+        //城门区域检测
+        if(this.sp.x>932&&this.sp.x<1068&&this.sp.y>350&&this.sp.y<390)
+        {
+            this.destoryPeople();
+            Laya.Pool.recover(this.type,this);
+            OutCountryData.ins_.outCount--;
+            //国家人口+1
+            CountryData.ins_.population++;
+        }
     }
     /**人消失 */
     private destoryPeople() : void
     {
         this.sp.visible = false;
-        
+        Laya.timer.clearAll(this);
     }
 }

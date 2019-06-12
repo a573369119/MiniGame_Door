@@ -9,7 +9,7 @@ export default class CountryData{
     /**国家幸福度 */
     public popularSupport : number;
     /**国家人口 */
-    public population : number;
+    public population : number=100;
     /**国家科技 */
     public technology : number;
     /**国家声望 */
