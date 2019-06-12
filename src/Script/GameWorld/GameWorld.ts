@@ -5,6 +5,7 @@ import UIManager from "../../Core/UIManager";
 import PeopleManager from "../../Core/PeopleManager";
 import GameConfig from "../../Config/GameConfig";
 import MsgDialog from "../../Core/MsgDialog";
+import CountryData from "../../Core/DataManager";
 
 /**
  * 世界管理器脚本
@@ -21,8 +22,6 @@ export default class GameWorld extends ui.GameWorldUI{
     private msgDialog : MsgDialog;
 
     //-------------------------------
-    /**门是否打开 */
-    private isOpen : boolean;
     /**屏幕宽度 */
     private screenWidth : number;
     /**鼠标是否按下 */
@@ -89,14 +88,14 @@ export default class GameWorld extends ui.GameWorldUI{
     /**门的开关 */
     private doorCtr() : void
     {
-        if(this.isOpen)
+        if(CountryData.ins_.isDoorOpen)
         {//开门
-            this.isOpen = false;
+            CountryData.ins_.isDoorOpen = false;
             this.doorClose();
         }
         else
         {//关门
-            this.isOpen = true;
+            CountryData.ins_.isDoorOpen = true;
             this.doorOpen();
         }
     }

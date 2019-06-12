@@ -41,6 +41,7 @@ export default class People {
         {
             this.people_PosOut();
             Laya.timer.frameLoop(1,this,this.checkLimit_Out);
+            Laya.timer.frameOnce(OutCountryData.ins_.limitTime*60,this,this.limitTime);
         }
         else
         {
@@ -79,8 +80,21 @@ export default class People {
     private people_PosOut() : void
     {
         //给予随机方向，方向用(-1~1)表示
-        this.dirX=Math.random()*2-1;
-        this.dirY=Math.random()*2-1;
+        if(this.sp.x<=900)
+        {
+            this.dirX=Math.random();
+            this.dirY=Math.random();
+        }
+        else if(this.sp.x>=1100)
+        {
+            this.dirX=-Math.random();
+            this.dirY=Math.random();
+        }
+        else
+        {
+            this.dirX=Math.random()*2-1;
+            this.dirY=Math.random()*2-1;
+        }
         //给予随机时间，在此时间内移动,随机时间在(2,8)中选择
         let time=Math.random()*6+2;
         Laya.timer.frameOnce(time*60,this,this.closeMoveTimer);
@@ -104,6 +118,24 @@ export default class People {
         Laya.timer.frameOnce(time*60,this,this.people_PosOut);
     }
     
+    /**滞留时间，若超过时间，就离开外城 */
+    private limitTime():void
+    {
+        Laya.timer.clearAll(this);
+        if(this.sp.x<=1000)
+        {
+            this.dirX=-Math.random();
+            this.dirY=-Math.random();
+        }
+        else
+        {
+            this.dirX=Math.random();
+            this.dirY=-Math.random();
+        }
+        Laya.timer.frameLoop(1,this,this.moveDistance);
+        Laya.timer.frameLoop(1,this,this.checkLimit_Out);
+    }
+
     /**墙内人行动逻辑*/
     private people_PosInner() : void
     {
@@ -126,19 +158,23 @@ export default class People {
         if(this.sp.y>=390)
         {
             //重新给一个位移
-                //给予随机方向，方向用(-1~1)表示
-                this.dirX=Math.random()*2-1;
                 this.dirY=-Math.random();
         }
 
         //城门区域检测
         if(this.sp.x>932&&this.sp.x<1068&&this.sp.y>350&&this.sp.y<390)
         {
-            this.destoryPeople();
-            Laya.Pool.recover(this.type,this);
-            OutCountryData.ins_.outCount--;
-            //国家人口+1
-            CountryData.ins_.population++;
+            //城门是否打开
+            if(CountryData.ins_.isDoorOpen)
+            {
+                this.destoryPeople();
+                Laya.Pool.recover(this.type,this);
+                //城外人口-1
+                OutCountryData.ins_.outCount--;
+                //国家人口+1
+                CountryData.ins_.population++;
+            }
+            
         }
     }
     /**人消失 */

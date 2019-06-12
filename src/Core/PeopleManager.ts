@@ -83,8 +83,7 @@ export default class PeopleManager {
         }
         people.visible=true;
         this.getPos();
-        //people.setPos(this.X,this.Y);
-        people.setPos(900,300);
+        people.setPos(this.X,this.Y);
         people.openBehaviour();
         let time=Math.random()*3;
         if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
@@ -92,7 +91,6 @@ export default class PeopleManager {
             Laya.timer.frameOnce(time*60,this,this.createPeople);
         }
         OutCountryData.ins_.outCount++;
-        console.log(OutCountryData.ins_.outCount)
     }
 
     /**生成人的位置 */

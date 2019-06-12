@@ -44,7 +44,7 @@ export default class CountryData{
     
     //--------城门
     /**门是否打开*/
-    public isDoorOpen : boolean;
+    public isDoorOpen : boolean=true;
     /**人口进入量 */
     public enterPeople : number;
     /**人口流出量 */
@@ -95,7 +95,9 @@ export class OutCountryData{
     public static ins_ : OutCountryData = new OutCountryData();
     /**************主数据********************/
     /**最大外城容纳数量 */
-    public maxCount : number=10;
+    public maxCount : number=50;
     /**当前外城人口数 */
     public outCount:number=0;
+    /**人滞留时间 */
+    public limitTime:number=50;
 }
