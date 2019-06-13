@@ -51,6 +51,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Common(this.view,GameConfig.COMMON_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //小偷
@@ -60,6 +61,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.ROBBER_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //土匪
@@ -69,6 +71,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.BANDIT_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //科学家
@@ -78,6 +81,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.SCIENTIST_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //明星
@@ -87,6 +91,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.STAR_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         people.visible=true;

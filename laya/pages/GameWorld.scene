@@ -1,21 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-<<<<<<< HEAD
-    "selectedBox":2,
-    "selecteID":62,
-=======
     "selectedBox":96,
     "selecteID":99,
->>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
     "searchKey":"Scene",
     "props":{"width":1440,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
     "nodeParent":-1,
-<<<<<<< HEAD
-    "maxID":63,
-=======
     "maxID":100,
->>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -329,8 +320,6 @@
                             "$HIDDEN":false
                         },
                         {
-<<<<<<< HEAD
-=======
                             "type":"Sprite",
                             "searchKey":"Sprite,house_16",
                             "props":{"y":816,"x":607,"var":"house_16","texture":"map/house.png"},
@@ -345,7 +334,6 @@
                             "$HIDDEN":false
                         },
                         {
->>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
                             "type":"Sprite",
                             "searchKey":"Sprite,house_17,house_17",
                             "props":{"y":755,"x":513,"width":49,"var":"house_17","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_17","height":49},
@@ -711,8 +699,6 @@
                     "compId":71,
                     "child":[
                         {
-<<<<<<< HEAD
-=======
                             "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
@@ -729,7 +715,6 @@
                         },
                         {
                             "x":45,
->>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
                             "type":"Text",
                             "searchKey":"Text,text_count_population",
                             "props":{"y":0,"x":51,"width":97,"var":"text_count_population","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},

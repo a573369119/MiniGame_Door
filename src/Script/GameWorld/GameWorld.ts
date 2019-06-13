@@ -276,13 +276,22 @@ export default class GameWorld extends ui.GameWorldUI{
         let innerTaget = countryData.enterPeople;//进门目标数
         let _outer = countryData._outerPeople;//出城口实际值
         let _inner = countryData._innerPeople;//入城实际值
+        let lastTime = 120000 - this.timerCount - 50000;//获取剩余时间，多预支10秒
         if(outerTarget > _outer)
         {
             //通知
+            countryData.peopleGoOut(false);
         }
         if(innerTaget > _inner)
         {
-            //通知
+            //通知            
+            countryData.peopleGoOut(true);
+        }
+
+        if(this.timerCount > 120000)
+        {
+            countryData._outerPeople = 0;//实际值归零
+            countryData._innerPeople = 0;//实际值归零
         }
     }
 

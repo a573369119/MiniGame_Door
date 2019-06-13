@@ -273,6 +273,20 @@ export default class CountryData{
         
     }
 
+    //-------------------------------公式
+    /**稳定支出 */
+    private money_SteadyCost():void
+    {
+        this.money-=this.armyCost*(1-this.armyPercent)+this.governCost+this.technologyCost;
+    }
+
+    /**粮食消耗 */
+    private population_GrainCost():void
+    {
+        
+    }
+
+
     /**改变 进、出 目标人数 @isout:是否是出城  @count：改变目标值*/
     public setInOutTarget(isOut,count) : void
     {
@@ -287,6 +301,21 @@ export default class CountryData{
         else this._innerPeople += count;
     }
     
+    /**通知人口出城 @type ： 进成ture  出城 false*/
+    public peopleGoOut(type) : void
+    {
+        let arr = this.arr_inPeople;
+        if(type) arr = this.arr_outPeople;
+        let random = Math.random();
+        let index = Math.floor(arr.length*random);
+        if(index>0)
+        {
+            if(!arr[index].isGo)
+            {
+                arr[index].peopleGo(type);
+            } 
+        }
+    }
     
 }
 

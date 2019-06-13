@@ -30,6 +30,8 @@ export default class People {
     public targetNode : Laya.Sprite;
     /**出生点 */
     public bornNode : Laya.Sprite;
+    /**是否被召唤 */
+    public isGo : number;
 
 
 
@@ -169,6 +171,8 @@ export default class People {
         Laya.timer.frameLoop(1,this,this.checkLimit_Out);
     }
 
+    
+
     /**碰撞检测 */
     private checkLimit_Out():void
     {
@@ -176,8 +180,12 @@ export default class People {
         if(this.sp.x<-5||this.sp.x>2005||this.sp.y<-5)
         {
             this.destoryPeople();
-            Laya.Pool.recover(this.type,this);
             OutCountryData.ins_.outCount--;
+            if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
+            {
+                let time=Math.random()*3;
+                Laya.timer.frameOnce(time*60,this,this.createPeople);
+            }
         }
 
         //护城河检测
@@ -194,11 +202,15 @@ export default class People {
             if(CountryData.ins_.isDoorOpen)
             {
                 this.destoryPeople();
-                Laya.Pool.recover(this.type,this);
                 //城外人口-1
                 OutCountryData.ins_.outCount--;
                 //国家人口+1
                 CountryData.ins_.cal_MainData(GameConfig.MAIN_POPULATION,1);
+                if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
+                {
+                    let time=Math.random()*3;
+                    Laya.timer.frameOnce(time*60,this,this.createPeople);
+                }
             }
             
         }
@@ -354,11 +366,51 @@ export default class People {
         let tY = 600;
         this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
     }
+///////////////////////////////////////////////////////////////////////////////////
+    /***
+     * 进程 / 出城逻辑 
+     * @type true进城  false出城
+    */
+    public peopleGo(type) : void
+    {
+            if(type) {
+                //进城方法
+                this.outPeople_ToDoor();
+            }else{
+                //出城方法
+            }
+    }
 
+    /**城外强制进门 */
+    private outPeople_ToDoor():void
+    {
+        Laya.timer.clearAll(this);
+        let dirX=1000-this.sp.x;
+        let dirY=410-this.sp.y;
+        let dis=Math.sqrt(Math.pow(1000-this.sp.x,2)+Math.pow(410-this.sp.y,2));
+        this.dirX=dirX/dis;
+        this.dirY=dirY/dis;
+        Laya.timer.frameLoop(1,this,this.moveDistance);
+        Laya.timer.frameLoop(1,this,this.checkLimit_Out);
+    }
+
+    /**门强制出城外 */
+    private doorPeople_ToOut():void
+    {
+        Laya.timer.clearAll(this);
+        let x=Math.random()*136+932;
+        let y=350;
+        this.setPos(x,y,this.sp);
+        this.dirX=Math.random()*2-1;
+        this.dirY=-Math.random()*0.7-0.2;
+        Laya.timer.frameLoop(1,this,this.moveDistance);
+        Laya.timer.frameLoop(1,this,this.checkLimit_Out);
+    }
     /**人消失 */
     protected destoryPeople() : void
     {
         this.sp.visible = false;
+        Laya.Pool.recover(this.type,this);
         Laya.timer.clearAll(this);
     }
 }
