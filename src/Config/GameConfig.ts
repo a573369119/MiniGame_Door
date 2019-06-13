@@ -24,4 +24,26 @@ export default class GameConfig {
     public static EVENT_HOUSE: number = 5;
     /**皇宫 */
     public static PALACE: number = 6;
+
+
+    //----------------------------------主值
+    /**国家财政 */
+    public static MAIN_MONEY : string = "money";
+    /**国家人口 */
+    public static MAIN_POPULATION : string="population";
+    /**国家幸福度 */
+    public static MAIN_POPULARSUPPORT : string = "popularSupport";
+    /**国家科技 */
+    public static MAIN_TECHNOLOGY : string = "technology";
+    /**国家声望 */
+    public PRESTIGE : string = "prestige";
+
+
+    //----------------------------------其他
+    /**一天时间/分钟 */
+    public static ONE_DAY:number=10*60;
+    /**粮食生产率换钱临界值 */
+    public static GRAIN_EXCHANGEMONEY_PERCENT=1.5;
+    /**钱换粮食汇率 */
+    public static MONEYTOGRAIN=2;
 }

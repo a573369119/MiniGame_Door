@@ -6,6 +6,7 @@ import PeopleManager from "../../Core/PeopleManager";
 import GameConfig from "../../Config/GameConfig";
 import MsgDialog from "../../Core/MsgDialog";
 import CountryData from "../../Core/DataManager";
+import BuyDialog from "../../Core/BuyDialog";
 
 /**
  * 世界管理器脚本
@@ -20,7 +21,8 @@ export default class GameWorld extends ui.GameWorldUI{
     private uiManager : UIManager;
     /**消息通用框 */
     private msgDialog : MsgDialog;
-
+    /**购买框 */
+    private buyDialog:BuyDialog;
     //-------------------------------
     /**屏幕宽度 */
     private screenWidth : number;
@@ -49,6 +51,7 @@ export default class GameWorld extends ui.GameWorldUI{
         this.peopleManager = new PeopleManager(this.sp_scene);
         this.uiManager = new UIManager(this.sp_UI);
         this.msgDialog = new MsgDialog();      
+        this.buyDialog=new BuyDialog();
         this.mousePos = {};
         this.isDown = false;
     }
@@ -61,6 +64,8 @@ export default class GameWorld extends ui.GameWorldUI{
         this.sp_scene.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);
         //给门帮点点击事   
         this.sp_door.on(Laya.Event.CLICK,this,this.doorCtr);
+        //购买按钮事件绑定
+        this.btn_buy.on(Laya.Event.CLICK,this,this.buyDialog_Click);
         //医馆事件绑定
         this.hospital.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.HOSPITAL]);
         //军队事件绑定
@@ -149,6 +154,82 @@ export default class GameWorld extends ui.GameWorldUI{
         this.msgDialog.showMsg(type);
     }
 
+    /**点击购买按钮 */
+    private buyDialog_Click():void
+    {
+        console.log("Ze")
+        this.buyDialog.popup();
+    }
+
+    //---------------------------粮食-------------
+    /**粮食产出公式 */
+    public cal_GrainAdd():void
+    {
+
+    }
+
+    /**粮食消耗公式 */
+    public cal_GrainMinus():void
+    {
+        
+    }
+
+    /**粮食结算 */
+    public cal_Grain():void
+    {
+        //如果还有粮食库存
+        if(CountryData.ins_.grainAdd>=CountryData.ins_.grainMinus)
+        {
+            //如果生产量大于大于消耗率的某个倍率，先让其自动转化为财政，之后修改为手动转化
+            if(CountryData.ins_.grainAdd/CountryData.ins_.grainMinus>=GameConfig.GRAIN_EXCHANGEMONEY_PERCENT)
+            {
+                //超出倍率的部分
+                let exchange=CountryData.ins_.grainAdd-CountryData.ins_.grainMinus*GameConfig.GRAIN_EXCHANGEMONEY_PERCENT;
+                //换钱
+                this.exchangeMoney(exchange);
+                //剩余的加入库存
+                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-exchange-CountryData.ins_.grainMinus);
+            }
+            else
+            {
+                //加入库存
+                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-CountryData.ins_.grainMinus);
+            }
+        }
+        else
+        {
+            //如果库存加上生产的粮食不足以抵够消耗的粮食
+            if((CountryData.ins_.grainStock+CountryData.ins_.grainAdd)<CountryData.ins_.grainMinus)
+            {
+                //点击选择是否购买粮食，如果不购买则导致人口减少和幸福度降低
+                
+            }
+            else
+            {
+                //减少库存
+                CountryData.ins_.grainStock-=CountryData.ins_.grainMinus-CountryData.ins_.grainAdd;
+            }
+        }
+    }
+
+    /**粮食换钱 */
+    public exchangeMoney(grain:number):void
+    {
+
+    }
+
+    /**钱换粮食 */
+    public exchangeGrain(money:number):void
+    {
+
+    }
+
+    //----------------------稀有门
+    /**购买稀有门 */
+    public buyRareDoor():void
+    {
+        
+    }
     ////////////游戏流程开始//////////////////////////
     /**游戏流程开始 */
     private gameStart() : void

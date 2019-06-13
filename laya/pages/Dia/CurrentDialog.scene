@@ -1,8 +1,7 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":8,
-    "selecteID":11,
+    "selectedBox":2,
     "searchKey":"Scene",
     "props":{"width":1440,"sceneColor":"#000000","runtime":"Core/MsgDialog.ts","hitTestPrior":true,"height":476},
     "nodeParent":-1,

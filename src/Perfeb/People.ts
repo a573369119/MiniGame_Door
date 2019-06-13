@@ -177,7 +177,7 @@ export default class People {
                 //城外人口-1
                 OutCountryData.ins_.outCount--;
                 //国家人口+1
-                CountryData.ins_.population++;
+                CountryData.ins_.cal_MainData(GameConfig.MAIN_POPULATION,1);
             }
             
         }
