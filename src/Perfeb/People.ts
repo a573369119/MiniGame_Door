@@ -96,6 +96,7 @@ export default class People {
             this.view.addChild(this.sp);
         }
         this.sp.loadImage(imgUrl);
+        this.sp.size(12,12);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);        
     }
 
@@ -223,7 +224,7 @@ export default class People {
     /**towerd转化成位移 */
     protected towedToMove() : void
     {
-        this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,1000,600);;
+        if(!this.toward.rotation) this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,200,600);;
         this.peopleTowerd();//让目标朝向计算数
     }
 
@@ -251,7 +252,7 @@ export default class People {
         {//撞到了需要转方向
             this.toward.rotationChange = 0;
             this.speedCtr(power);
-            this.judgeLeftRight(power);        
+            this.judgeLeftRight();        
             this.posMove();//移动
             return false;
         }
@@ -264,12 +265,12 @@ export default class People {
     /**速度控制 */
     private speedCtr(power) : void
     {
-        this.toward.speed = GameConfig.TEST_POINT_SPEED*((power+1)/(this.towardPos.length+3)); 
-        console.log("speed ::" + this.toward.speed);
+        this.toward.speed = GameConfig.TEST_POINT_SPEED*((power+1)/(this.towardPos.length+2)); 
+        // console.log("speed ::" + this.toward.speed);
     }
 
     /**判断方向 */
-    protected judgeLeftRight(power) : void
+    protected judgeLeftRight() : void
     {
         this.toward.rotationChange += GameConfig.TEST_POINT_RO;
         let ro1 = this.toward.rotation - this.toward.rotationChange;
@@ -280,15 +281,15 @@ export default class People {
         let numRo2 = this.testColider();
         if(numRo1 == -1) {this.toward.rotation = ro1; return;}
         if(numRo2 == -1) {this.toward.rotation = ro2; return;}
-        this.judgeLeftRight(power);
+        this.judgeLeftRight();
     }
 
     /**findTarget寻找目标 */
     private findTarget() : void
     {
         let Ca = this.toward.rotation - this.toward.targetRotation;
-        if(Ca > 0) this.toward.rotation += 5;
-            else if( Ca < 0 ) this.toward.rotation -=5;
+        if(Ca > 0) this.toward.rotation -= 5;
+            else if( Ca < 0 ) this.toward.rotation +=5;
         if( Math.abs(Ca) < 5) this.toward.rotation += Ca;
     }   
 
@@ -332,7 +333,7 @@ export default class People {
         let sin : number = Tool.rotationSet(rotation,"sin");
 
         // console.log("---------------x::" + this.sp.x + "y::" + this.sp.y);
-        for(let i=0;i<5;i++)//记录五个
+        for(let i=0;i<GameConfig.TEST_POINT_COUNT;i++)//记录五个
         { 
             if(!this.towardPos[i]) this.towardPos[i] = {};        
             this.towardPos[i].x = this.sp.x + GameConfig.TEST_POINT_DIC*sin*(i+1);
@@ -349,7 +350,7 @@ export default class People {
         let pY = this.sp.y;
         // let tX = this.targetNode.x;
         // let tY = this.targetNode.y;
-        let tX = 1000;
+        let tX = 200;
         let tY = 600;
         this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
     }

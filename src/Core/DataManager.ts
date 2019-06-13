@@ -1,4 +1,5 @@
 import GameConfig from "../Config/GameConfig";
+import People from "../Perfeb/People";
 
 /**
  * 数据中心 所有的数据
@@ -42,13 +43,21 @@ export default class CountryData{
     public GDP : number = 10;
 
 
-    /**进城数 2min*/
+    /**进城数 目标值2min*/
     public enterPeople : number = 50;
-    /**出城数 2min*/
+    /**出城数 目标值2min*/
     public exitPeople : number = 50;
     /**人口比例数 进城数/出城数 2min*/
     public percent : number = 1;
-    //------------------------------------------
+    /**城外人口数组*/
+    public arr_outPeople : Array<People>;
+    /**城内人口数组 */
+    public arr_inPeople : Array<People>;
+    /**出城人口 实际值/2min */
+    public _outerPeople : number;
+    /**进门人口 实际值/2min */
+    public _innerPeople : number;
+    //------------------------------------------普通人口占比
     /**普通人中 医生的占比*/
     public percentDoctor : number = 0.02;
     /**普通人种 警察占比 */
@@ -59,6 +68,14 @@ export default class CountryData{
     public percentNothing : number = 0.1;
     /**农民 */
     public farmer : number = 0.7;
+
+    //--------影响 【主数据】----------------
+    
+
+
+
+
+
 
     //--------事件数据
     /**瘟疫  0 1 2 3 4 5 0-是没发生*/
@@ -80,7 +97,16 @@ export default class CountryData{
     public bandit : number = 1;
     /**盗贼 -A */
     public robber : number = 1;
-    
+        // /**普通人 A  普通人中会产生医生 警察 等正常职业*/
+        // public common : number = 1;
+        // /**科学家 SSS*/
+        // public scientist : number = 0;
+        // /**明星 SS*/
+        // public star : number = 0;
+        // /**土匪 -S */
+        // public bandit : number = 0;
+        // /**盗贼 -A */
+        // public robber : number = 0;
     //--------城门
     /**门是否打开*/
     public isDoorOpen : boolean=true;
@@ -122,6 +148,8 @@ export default class CountryData{
     constructor(){
         this.arr_LeftArea = new Array<any>();
         this.arr_RightArea = new Array<any>();
+        this.arr_inPeople = new Array<People>();
+        this.arr_outPeople = new Array<People>();
     }
 
     onEnable(){
@@ -171,8 +199,8 @@ export default class CountryData{
 
 
     //----------------------------------------结算
-    /**五大主值结算 */
-    public cal_MainData(type:string,count:number):void
+    /**设置五大主值结算 */
+    public set_MainData(type:string,count:number):void
     {
         switch(type)
         {
@@ -192,8 +220,72 @@ export default class CountryData{
                 this.prestige+=count;
                 break;
         }
+        this.cal_MainData(type,count);
     }
 
+    
+    public cal_MainData(type:string,count:number):void
+    {
+        switch(type){
+            case GameConfig.MAIN_MONEY:
+            ///TO DO
+        }
+        //财政 影响结算
+        this.moneyInfluence();
+        //人口 影响结算
+        this.popularSupportInfluence();
+        //幸福度 影响结算
+        this.popularSupportInfluence();
+        //科技 影响结算
+        this.technologyInfluence();
+        //威望 影响结算
+        this.prestigeInfluence();
+    }    
+
+    /**财政结算 财政影响*/
+    private moneyInfluence() : void
+    {
+        
+    }
+
+    
+    /**幸福度 影响结算*/
+    private popularSupportInfluence() : void
+    {
+        
+    }
+
+    /**人口 影响结算*/
+    private populationInfluence() : void
+    {
+        
+    }
+
+    /**科技 影响结算*/
+    private technologyInfluence() : void
+    {
+        
+    }
+
+    /**威望 影响结算*/
+    private prestigeInfluence() : void
+    {
+        
+    }
+
+    /**改变 进、出 目标人数 @isout:是否是出城  @count：改变目标值*/
+    public setInOutTarget(isOut,count) : void
+    {
+        if(isOut) this.exitPeople += count;
+        else this.enterPeople += count;
+    }
+
+    /**改变 进、出 目标人数 @isout:是否是出城  @count：改变实际值*/
+    public setInOutTruth(isOut,count) : void
+    {
+        if(isOut) this._outerPeople += count;
+        else this._innerPeople += count;
+    }
     
     
 }

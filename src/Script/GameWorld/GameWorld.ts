@@ -7,6 +7,7 @@ import GameConfig from "../../Config/GameConfig";
 import MsgDialog from "../../Core/MsgDialog";
 import CountryData from "../../Core/DataManager";
 import BuyDialog from "../../Core/BuyDialog";
+import People from "../../Perfeb/People";
 
 /**
  * 世界管理器脚本
@@ -23,6 +24,7 @@ export default class GameWorld extends ui.GameWorldUI{
     private msgDialog : MsgDialog;
     /**购买框 */
     private buyDialog:BuyDialog;
+    
     //-------------------------------
     /**屏幕宽度 */
     private screenWidth : number;
@@ -30,7 +32,8 @@ export default class GameWorld extends ui.GameWorldUI{
     private isDown : boolean;
     /**鼠标点记录 */
     private mousePos : any;
-
+    //--------------------------
+    private timerCount : number;
 
     constructor(){
         super();
@@ -55,6 +58,7 @@ export default class GameWorld extends ui.GameWorldUI{
         this.buyDialog=new BuyDialog();
         this.mousePos = {};
         this.isDown = false;
+        this.timerCount = 0;
     }
 
     /**添加事件 */
@@ -255,6 +259,31 @@ export default class GameWorld extends ui.GameWorldUI{
     {
         this.peopleManager.createPeople();//人口生成逻辑运行
         this.peopleManager.createPeople_Inner();//内人口生成
+    }
+
+
+    //////////////////////////////////////////////人口流动通知器
+    /**
+     * 流动比例， 通知器
+     * 
+     *  */
+    private currentRatio() : void
+    {
+        this.timerCount++;
+        let countryData = CountryData.ins_;
+        let BI = countryData.percent;   //进/出
+        let outerTarget = countryData.exitPeople;//出门目标数
+        let innerTaget = countryData.enterPeople;//进门目标数
+        let _outer = countryData._outerPeople;//出城口实际值
+        let _inner = countryData._innerPeople;//入城实际值
+        if(outerTarget > _outer)
+        {
+            //通知
+        }
+        if(innerTaget > _inner)
+        {
+            //通知
+        }
     }
 
 }
