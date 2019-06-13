@@ -20,6 +20,7 @@ export default class PeopleManager {
     private countTime : number = 0;
     /**生产时间间隔 */
     private countTime_ : number = 500;
+    //---------------------------------------
     constructor(view)
     {
         this.view=view;
@@ -182,6 +183,7 @@ export default class PeopleManager {
                 this.alreadyCreate[1]++;
                 break;
         }
+        CountryData.ins_.arr_inPeople.push(people);//加入维护数组
         if(people === undefined || people === null) {console.log("没有生成人种！种类:" + randomString);return;}
         this.createPos(people); 
     }

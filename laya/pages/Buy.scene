@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":3,
-    "selecteID":11,
+    "selectedBox":2,
+    "selecteID":14,
     "searchKey":"Dialog",
     "props":{"width":800,"sceneColor":"#000000","runtime":"Core/BuyDialog.ts","height":400},
     "nodeParent":-1,
-    "maxID":13,
+    "maxID":15,
     "label":"Dialog",
     "isOpen":true,
     "isDirectory":true,
@@ -55,7 +55,6 @@
                     "compId":5,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "searchKey":"Text",
                             "props":{"y":0,"x":0,"width":158,"text":"购买","height":55,"fontSize":36,"font":"Microsoft YaHei","align":"center"},
@@ -115,32 +114,33 @@
                 },
                 {
                     "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":80,"x":141,"width":156,"texture":"map/bg3.png","pivotY":28,"pivotX":78,"height":55},
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"y":249,"x":283,"width":75,"text":"价格","height":55,"fontSize":36,"font":"Microsoft YaHei","align":"right"},
                     "nodeParent":3,
-                    "label":"Sprite",
+                    "label":"Text",
                     "isOpen":true,
-                    "isDirectory":true,
+                    "isDirectory":false,
                     "isAniNode":true,
-                    "hasChild":true,
-                    "compId":11,
+                    "hasChild":false,
+                    "compId":13,
                     "child":[
-                        {
-                            "x":45,
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"y":0,"x":0,"width":158,"text":"购买","height":55,"fontSize":36,"font":"Microsoft YaHei","align":"center"},
-                            "nodeParent":11,
-                            "label":"Text",
-                            "isOpen":true,
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":12,
-                            "child":[
-                                ]
-                        }]
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text,buy_price",
+                    "props":{"y":253,"x":446,"width":180,"var":"buy_price","text":"543","height":47,"fontSize":32,"font":"Microsoft YaHei","align":"right"},
+                    "nodeParent":3,
+                    "label":"buy_price",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":14,
+                    "child":[
+                        ]
                 }]
         }],
     "animations":[

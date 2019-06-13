@@ -7,6 +7,7 @@ import GameConfig from "../../Config/GameConfig";
 import MsgDialog from "../../Core/MsgDialog";
 import CountryData from "../../Core/DataManager";
 import BuyDialog from "../../Core/BuyDialog";
+import People from "../../Perfeb/People";
 
 /**
  * 世界管理器脚本
@@ -23,6 +24,7 @@ export default class GameWorld extends ui.GameWorldUI{
     private msgDialog : MsgDialog;
     /**购买框 */
     private buyDialog:BuyDialog;
+    
     //-------------------------------
     /**屏幕宽度 */
     private screenWidth : number;
@@ -30,7 +32,8 @@ export default class GameWorld extends ui.GameWorldUI{
     private isDown : boolean;
     /**鼠标点记录 */
     private mousePos : any;
-
+    //--------------------------
+    private timerCount : number;
 
     constructor(){
         super();
@@ -55,6 +58,7 @@ export default class GameWorld extends ui.GameWorldUI{
         this.buyDialog=new BuyDialog();
         this.mousePos = {};
         this.isDown = false;
+        this.timerCount = 0;
     }
 
     /**添加事件 */
@@ -68,8 +72,6 @@ export default class GameWorld extends ui.GameWorldUI{
         this.sp_scene.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);
         //给门帮点点击事   
         this.sp_door.on(Laya.Event.CLICK,this,this.doorCtr);
-        //购买按钮事件绑定
-        this.btn_buy.on(Laya.Event.CLICK,this,this.buyDialog_Click);
         //医馆事件绑定
         this.hospital.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.HOSPITAL]);
         //军队事件绑定
@@ -81,7 +83,7 @@ export default class GameWorld extends ui.GameWorldUI{
         //新闻点事件绑定
         //this.eventHouse.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.EVENT_HOUSE]);     
         //新闻皇宫绑定
-        this.palace.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.PALACE]);           
+        this.palace.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.PALACE]);
     }
 
     /**屏幕 局中*/
@@ -159,11 +161,28 @@ export default class GameWorld extends ui.GameWorldUI{
     }
 
     /**点击购买按钮 */
-    private buyDialog_Click():void
+    /*private buyDialog_Click(type:string):void
     {
-        console.log("Ze")
+        switch(type)
+        {
+            case GameConfig.MAIN_POPULATION:
+                this.buyDialog.buy_name.text="人口";
+                break;
+            case GameConfig.MAIN_POPULARSUPPORT:
+                this.buyDialog.buy_name.text="幸福度";
+                break;
+            case GameConfig.MAIN_MONEY:
+                this.buyDialog.buy_name.text="财政";
+                break;
+            case GameConfig.MAIN_TECHNOLOGY:
+                this.buyDialog.buy_name.text="科技";
+                break;
+            case GameConfig.MAIN_PRESTIGE:
+                this.buyDialog.buy_name.text="威望";
+                break;
+        }
         this.buyDialog.popup();
-    }
+    }*/
 
     //---------------------------粮食-------------
     /**粮食产出公式 */
@@ -179,7 +198,7 @@ export default class GameWorld extends ui.GameWorldUI{
     }
 
     /**粮食结算 */
-    public cal_Grain():void
+    /*public cal_Grain():void
     {
         //如果还有粮食库存
         if(CountryData.ins_.grainAdd>=CountryData.ins_.grainMinus)
@@ -214,7 +233,7 @@ export default class GameWorld extends ui.GameWorldUI{
                 CountryData.ins_.grainStock-=CountryData.ins_.grainMinus-CountryData.ins_.grainAdd;
             }
         }
-    }
+    }*/
 
     /**粮食换钱 */
     public exchangeMoney(grain:number):void
@@ -240,6 +259,31 @@ export default class GameWorld extends ui.GameWorldUI{
     {
         this.peopleManager.createPeople();//人口生成逻辑运行
         this.peopleManager.createPeople_Inner();//内人口生成
+    }
+
+
+    //////////////////////////////////////////////人口流动通知器
+    /**
+     * 流动比例， 通知器
+     * 
+     *  */
+    private currentRatio() : void
+    {
+        this.timerCount++;
+        let countryData = CountryData.ins_;
+        let BI = countryData.percent;   //进/出
+        let outerTarget = countryData.exitPeople;//出门目标数
+        let innerTaget = countryData.enterPeople;//进门目标数
+        let _outer = countryData._outerPeople;//出城口实际值
+        let _inner = countryData._innerPeople;//入城实际值
+        if(outerTarget > _outer)
+        {
+            //通知
+        }
+        if(innerTaget > _inner)
+        {
+            //通知
+        }
     }
 
 }

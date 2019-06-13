@@ -9,6 +9,7 @@ export module ui {
 		public buy_name:laya.display.Text;
 		public buy_input:Laya.TextInput;
 		public btn_close:Laya.Sprite;
+		public buy_price:laya.display.Text;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -30,7 +31,7 @@ export module ui {
 		public house_6:Laya.Sprite;
 		public house_8:Laya.Sprite;
 		public house_9:Laya.Sprite;
-		public eventHouse:Laya.Sprite;
+		public house_10:Laya.Sprite;
 		public house_11:Laya.Sprite;
 		public house_12:Laya.Sprite;
 		public house_13:Laya.Sprite;
@@ -38,6 +39,7 @@ export module ui {
 		public house_15:Laya.Sprite;
 		public palace:Laya.Sprite;
 		public hospital:Laya.Sprite;
+		public house_16:Laya.Sprite;
 		public house_17:Laya.Sprite;
 		public house_18:Laya.Sprite;
 		public house_19:Laya.Sprite;
@@ -63,7 +65,16 @@ export module ui {
 		public house_37:Laya.Sprite;
 		public army:Laya.Sprite;
 		public sp_UI:Laya.Sprite;
-		public btn_buy:Laya.Sprite;
+		public img_population:Laya.Sprite;
+		public text_count_population:laya.display.Text;
+		public img_popularSupport:Laya.Sprite;
+		public text_count_popularSupport:laya.display.Text;
+		public img_money:Laya.Sprite;
+		public text_count_money:laya.display.Text;
+		public img_technology:Laya.Sprite;
+		public text_count_technology:laya.display.Text;
+		public img_prestige:Laya.Sprite;
+		public text_count_prestige:laya.display.Text;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

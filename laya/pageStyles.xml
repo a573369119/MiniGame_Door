@@ -5,4 +5,5 @@
    <item name="Dialog/BuyDialog.scene" props="" ifExport="分离模式" aName=""/>
    <item name="Buy.scene" props="" ifExport="分离模式" aName=""/>
    <item name="Dia/CurrentDialog.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="prefab/Info.scene" props="" ifExport="分离模式" aName=""/>
 </page>

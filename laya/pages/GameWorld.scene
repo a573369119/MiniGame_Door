@@ -1,12 +1,21 @@
 {
     "x":0,
     "type":"Scene",
+<<<<<<< HEAD
     "selectedBox":2,
     "selecteID":62,
+=======
+    "selectedBox":96,
+    "selecteID":99,
+>>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
     "searchKey":"Scene",
-    "props":{"width":2000,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
+    "props":{"width":1440,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
     "nodeParent":-1,
+<<<<<<< HEAD
     "maxID":63,
+=======
+    "maxID":100,
+>>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -57,8 +66,8 @@
                 },
                 {
                     "type":"Sprite",
-                    "searchKey":"Sprite,sp_wall,sp_wall",
-                    "props":{"y":450,"x":0,"width":2000,"var":"sp_wall","texture":"map/wall.png","pivotY":10,"name":"sp_wall","height":20},
+                    "searchKey":"Sprite,sp_wall",
+                    "props":{"y":450,"x":0,"width":2000,"var":"sp_wall","texture":"map/wall.png","pivotY":10,"height":20},
                     "nodeParent":8,
                     "label":"sp_wall",
                     "isDirectory":false,
@@ -86,7 +95,7 @@
                 {
                     "type":"Sprite",
                     "searchKey":"Sprite,house,house",
-                    "props":{"y":0,"x":0,"width":2000,"var":"house","name":"house","height":900},
+                    "props":{"y":1,"x":1,"width":1999,"var":"house","name":"house","height":899},
                     "nodeParent":8,
                     "label":"house",
                     "isOpen":true,
@@ -209,10 +218,10 @@
                         },
                         {
                             "type":"Sprite",
-                            "searchKey":"Sprite,eventHouse,eventHouse",
-                            "props":{"y":800,"x":632,"width":80,"var":"eventHouse","texture":"map/house.png","pivotY":71,"pivotX":40,"name":"eventHouse","hitTestPrior":true,"height":142},
+                            "searchKey":"Sprite,house_10",
+                            "props":{"y":730,"x":607,"var":"house_10","texture":"map/house.png"},
                             "nodeParent":25,
-                            "label":"eventHouse",
+                            "label":"house_10",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
@@ -293,8 +302,8 @@
                         },
                         {
                             "type":"Sprite",
-                            "searchKey":"Sprite,palace,palace",
-                            "props":{"y":817,"x":981,"width":524,"var":"palace","texture":"map/house.png","pivotY":87,"pivotX":262,"name":"palace","hitTestPrior":true,"height":174},
+                            "searchKey":"Sprite,palace",
+                            "props":{"y":817,"x":981,"width":524,"var":"palace","texture":"map/house.png","pivotY":87,"pivotX":262,"hitTestPrior":true,"height":174},
                             "nodeParent":25,
                             "label":"palace",
                             "isDirectory":false,
@@ -307,8 +316,8 @@
                         },
                         {
                             "type":"Sprite",
-                            "searchKey":"Sprite,hospital,hospital",
-                            "props":{"y":615,"x":463,"width":148,"var":"hospital","texture":"map/house.png","pivotY":74,"pivotX":74,"name":"hospital","hitTestPrior":true,"height":148},
+                            "searchKey":"Sprite,hospital",
+                            "props":{"y":541,"x":389,"width":148,"var":"hospital","texture":"map/house.png","hitTestPrior":true,"height":148},
                             "nodeParent":25,
                             "label":"hospital",
                             "isDirectory":false,
@@ -320,6 +329,23 @@
                             "$HIDDEN":false
                         },
                         {
+<<<<<<< HEAD
+=======
+                            "type":"Sprite",
+                            "searchKey":"Sprite,house_16",
+                            "props":{"y":816,"x":607,"var":"house_16","texture":"map/house.png"},
+                            "nodeParent":25,
+                            "label":"house_16",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":30,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        },
+                        {
+>>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
                             "type":"Sprite",
                             "searchKey":"Sprite,house_17,house_17",
                             "props":{"y":755,"x":513,"width":49,"var":"house_17","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_17","height":49},
@@ -377,8 +403,8 @@
                         },
                         {
                             "type":"Sprite",
-                            "searchKey":"Sprite,technology,technology",
-                            "props":{"y":621,"x":1466,"width":148,"var":"technology","texture":"map/house.png","pivotY":74,"pivotX":74,"name":"technology","hitTestPrior":true,"height":148},
+                            "searchKey":"Sprite,technology",
+                            "props":{"y":621,"x":1466,"width":148,"var":"technology","texture":"map/house.png","pivotY":74,"pivotX":74,"hitTestPrior":true,"height":148},
                             "nodeParent":25,
                             "label":"technology",
                             "isDirectory":false,
@@ -517,8 +543,8 @@
                         },
                         {
                             "type":"Sprite",
-                            "searchKey":"Sprite,farm,farm",
-                            "props":{"y":709,"x":132,"width":221,"var":"farm","texture":"map/house.png","pivotY":168,"pivotX":111,"name":"farm","hitTestPrior":true,"height":335},
+                            "searchKey":"Sprite,farm",
+                            "props":{"y":709,"x":132,"width":221,"var":"farm","texture":"map/house.png","pivotY":168,"pivotX":111,"hitTestPrior":true,"height":335},
                             "nodeParent":25,
                             "label":"farm",
                             "isDirectory":false,
@@ -643,8 +669,8 @@
                         },
                         {
                             "type":"Sprite",
-                            "searchKey":"Sprite,army,army",
-                            "props":{"y":707,"x":1874,"width":194,"var":"army","texture":"map/house.png","pivotY":160,"pivotX":97,"name":"army","hitTestPrior":true,"height":319},
+                            "searchKey":"Sprite,army",
+                            "props":{"y":707,"x":1874,"width":194,"var":"army","texture":"map/house.png","pivotY":160,"pivotX":97,"hitTestPrior":true,"height":319},
                             "nodeParent":25,
                             "label":"army",
                             "isDirectory":false,
@@ -674,32 +700,220 @@
             "child":[
                 {
                     "type":"Sprite",
-                    "searchKey":"Sprite,btn_buy",
-                    "props":{"y":66.75,"x":117.5,"width":159,"var":"btn_buy","texture":"map/bg.png","pivotY":28,"pivotX":78,"hitTestPrior":true,"height":53},
+                    "searchKey":"Sprite,img_population",
+                    "props":{"y":16,"x":6,"width":51,"var":"img_population","texture":"map/bg.png","height":50},
                     "nodeParent":10,
-                    "label":"btn_buy",
-                    "isOpen":false,
+                    "label":"img_population",
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":59,
+                    "compId":71,
                     "child":[
                         {
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"y":0,"x":0,"width":158,"text":"购买","height":55,"fontSize":36,"font":"Microsoft YaHei","align":"center"},
-                            "nodeParent":59,
-                            "label":"Text",
+<<<<<<< HEAD
+=======
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":71,
+                            "label":"Sprite",
                             "isOpen":true,
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":60,
+                            "compId":72,
                             "child":[
-                                ],
-                            "$HIDDEN":false
-                        }],
-                    "$HIDDEN":false
+                                ]
+                        },
+                        {
+                            "x":45,
+>>>>>>> 156f7abf6562772687abb80e7d7364d68af127c6
+                            "type":"Text",
+                            "searchKey":"Text,text_count_population",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_population","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":71,
+                            "label":"text_count_population",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":73,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_popularSupport",
+                    "props":{"y":16,"x":226,"width":51,"var":"img_popularSupport","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_popularSupport",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":80,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":80,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":81,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_popularSupport",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_popularSupport","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":80,
+                            "label":"text_count_popularSupport",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":82,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_money",
+                    "props":{"y":16,"x":446,"width":51,"var":"img_money","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_money",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":88,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":88,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":89,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_money",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_money","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":88,
+                            "label":"text_count_money",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":90,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_technology",
+                    "props":{"y":16,"x":666,"width":51,"var":"img_technology","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_technology",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":92,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":92,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":93,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_technology",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_technology","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":92,
+                            "label":"text_count_technology",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":94,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_prestige",
+                    "props":{"y":16,"x":886,"width":51,"var":"img_prestige","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_prestige",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":96,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":96,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":97,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_prestige",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_prestige","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":96,
+                            "label":"text_count_prestige",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":98,
+                            "child":[
+                                ]
+                        }]
                 }],
             "$HIDDEN":false
         }],
