@@ -35,7 +35,7 @@ export default class MsgDialog extends ui.Dia.CurrentDialogUI{
     {
         switch(this.type)
         {
-
+            
         }
     }
 

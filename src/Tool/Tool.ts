@@ -1,3 +1,5 @@
+import CountryData from "../Core/DataManager";
+
 export default class Tool{
     //获取三角函数值
     public static rotationDeal(fx:number,fy:number,sx:number,sy:number,getString) : number
@@ -136,11 +138,31 @@ export default class Tool{
      * */
     public static blockTest(sp,point) : boolean
     {
+        if(!sp || !point) return false;
         let pointLeft : any ={x:sp.x - sp.width/2,y:sp.y-sp.height/2};
         let pointRight : any ={x:sp.x + sp.width/2,y:sp.y+sp.height/2};
         let s_pointLeft = point.x > pointLeft.x && point.y>pointLeft.y;
         let s_pointRight = point.x < pointRight.x && point.y<pointRight.y;
         if(s_pointLeft && s_pointRight) return true;
         return  false;
+    }
+
+    /**
+     * GameData - CountryData
+     * 占比 数组
+    *获取区间数组 0,0.8,0.83,0.84,0.9,1
+     * @arr 属性名字
+    */
+    public static getPercentArea(arr):Array<number>
+    {
+        let arrPercent = [];//生产比例
+        let number = 0;
+        arrPercent.push(number);
+        for(let i = 0;i<arr.length;i++)
+        {
+            number += CountryData.ins_[arr[i]];
+            arrPercent.push(number);
+        }
+        return arrPercent;
     }
 }

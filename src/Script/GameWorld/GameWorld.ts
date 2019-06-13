@@ -33,7 +33,12 @@ export default class GameWorld extends ui.GameWorldUI{
     /**鼠标点记录 */
     private mousePos : any;
     //--------------------------
+    /**2min计时 */
     private timerCount : number;
+    /**出间隔计时 */
+    private timerCount_out : number;
+    /**进 */
+    private timerCount_in : number;
 
     constructor(){
         super();
@@ -59,6 +64,8 @@ export default class GameWorld extends ui.GameWorldUI{
         this.mousePos = {};
         this.isDown = false;
         this.timerCount = 0;
+        this.timerCount_out = 0;
+        this.timerCount_in = 0;
     }
 
     /**添加事件 */
@@ -270,6 +277,8 @@ export default class GameWorld extends ui.GameWorldUI{
     private currentRatio() : void
     {
         this.timerCount++;
+        this.timerCount_out++;
+        this.timerCount_in++;
         let countryData = CountryData.ins_;
         let BI = countryData.percent;   //进/出
         let outerTarget = countryData.exitPeople;//出门目标数
@@ -280,18 +289,34 @@ export default class GameWorld extends ui.GameWorldUI{
         if(outerTarget > _outer)
         {
             //通知
-            countryData.peopleGoOut(false);
+            if(this.timerCount_out >= lastTime/(outerTarget - _outer))
+            {
+                countryData.peopleGoOut(false);
+                this.timerCount_out = 0;
+            }
         }
         if(innerTaget > _inner)
         {
-            //通知            
+            //通知          
+            if(this.timerCount_in >= lastTime/(outerTarget - _inner))  
             countryData.peopleGoOut(true);
         }
 
         if(this.timerCount > 120000)
-        {
+        {   
+            this.timerCount_in = 0;
+            this.timerCount_out = 0;
             countryData._outerPeople = 0;//实际值归零
             countryData._innerPeople = 0;//实际值归零
+            this.timerCount = 0;
+            for(let i =0;i<outerTarget-_outer;i++)//通知出城
+            {
+                countryData.peopleGoOut(false);                
+            }
+            for(let i =0;i<innerTaget-_inner;i++)//通知进程
+            {
+                countryData.peopleGoOut(true);                
+            }
         }
     }
 

@@ -25,4 +25,25 @@ export default class Robber extends People{
     }
 
     /**降低 */
+
+    /**墙内 */
+   /**墙内逻辑 */
+   protected people_PosInner() : void
+   {
+       // this.setTraget(this.view.getChildByName("house").getChildByName("palace") as Laya.Sprite);
+       this.towedToMove();
+   }
+
+   /**重写specialdo */
+   protected specialDo() : void
+   {
+       let houseNode = this.view.getChildByName("house");
+       let targetNode : Laya.Sprite = this.getTargePos(houseNode);
+       for(let i=0;true;i++)
+       {
+           targetNode = this.getTargePos(houseNode);
+           if(targetNode !== this.bornNode) break;
+       }
+        this.setTraget(targetNode);
+   }
 }

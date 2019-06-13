@@ -9,7 +9,7 @@ import DataManager from "../Core/DataManager";
  */
 export default class People {
     /**场景*/
-    private view : Laya.Sprite;
+    protected view : Laya.Sprite;
     /**精灵 */
     public sp : Laya.Sprite;
     /**横坐标移动速度 */
@@ -32,6 +32,10 @@ export default class People {
     public bornNode : Laya.Sprite;
     /**是否被召唤 */
     public isGo : number;
+    /**递归停止变量 */
+    private stopDi : number;
+    /**参考速度 */
+    private speed : number;
 
 
 
@@ -54,14 +58,16 @@ export default class People {
     /**数据初始化 */
     private setDataInit() : void
     {
+        this.speed = CountryData.ins_.getMoveSpeed();
         this.toward = {
             x:1000,
             y:0,
-            speed:GameConfig.TEST_POINT_SPEED,rotation:undefined,
+            speed:this.speed,rotation:undefined,
             targetRotation:undefined,
             rotationChange : 0
         };
         this.towardPos = new Array();
+        this.stopDi = 0;
         
     }
 
@@ -228,15 +234,15 @@ export default class People {
     {
         // this.targetNode = target;
         //测试
-        this.targetNode = (this.view.getChildByName("palace") as Laya.Sprite);
-        this.toward.x = target.x;
-        this.toward.y = target.y;
+        this.targetNode = target;
+        // this.toward.x = target.x;
+        // this.toward.y = target.y;
     }
 
     /**towerd转化成位移 */
     protected towedToMove() : void
     {
-        if(!this.toward.rotation) this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,200,600);;
+        if(!this.toward.rotation) this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,this.targetNode.x,this.targetNode.y);;
         this.peopleTowerd();//让目标朝向计算数
     }
 
@@ -246,6 +252,14 @@ export default class People {
         this.sp.x += this.toward.speed*Tool.rotationSet(this.toward.rotation,"sin");
         this.sp.y += this.toward.speed*Tool.rotationSet(this.toward.rotation,"cos");
         this.sp.rotation = this.toward.rotation;
+        if(Tool.blockTest(this.targetNode,this.sp)) {
+            if(this.targetNode.name === "sp_door")
+            {
+                CountryData.ins_.goOut(this.type);
+            }
+            this.destoryPeople();
+        }
+        if(this.sp.x < 0 || this.sp.y > 900 || this.sp.x > 2000) {this.destoryPeople();}
         // console.log(this.sp.rotation);
     }
     
@@ -269,7 +283,7 @@ export default class People {
             return false;
         }
         this.findTarget();
-        this.toward.speed = GameConfig.TEST_POINT_SPEED;      
+        this.toward.speed = this.speed;      
         this.posMove();//移动  
         return true;
     }
@@ -277,13 +291,15 @@ export default class People {
     /**速度控制 */
     private speedCtr(power) : void
     {
-        this.toward.speed = GameConfig.TEST_POINT_SPEED*((power+1)/(this.towardPos.length+2)); 
+        this.toward.speed = this.speed*((power+1)/(this.towardPos.length+2)); 
         // console.log("speed ::" + this.toward.speed);
     }
 
     /**判断方向 */
     protected judgeLeftRight() : void
     {
+        this.stopDi++;
+        if(this.stopDi>36) {this.stopDi = 0;return;}
         this.toward.rotationChange += GameConfig.TEST_POINT_RO;
         let ro1 = this.toward.rotation - this.toward.rotationChange;
         let ro2 = this.toward.rotation + this.toward.rotationChange;
@@ -313,11 +329,11 @@ export default class People {
         if(this.sp.x<981) area = DataManager.ins_.arr_LeftArea;
         for(let i=0;i<area.length;i++)
         {
-            if(Tool.blockTest(this.bornNode,this.sp)) 
-                {return -1;}
+            if(Tool.blockTest(this.bornNode,this.sp)) {return -1;}
             if(Tool.blockTest(area[i],this.sp)){return 0;}//如果已经撞上了。             
             for(let h = 0;h<this.towardPos.length;h++)
             {//五个点检测
+                if(Tool.blockTest(this.targetNode,this.towardPos[h])){return-1;}
                 if(Tool.blockTest(area[i],this.towardPos[h]))
                 {//离人最近的点
                     num = h+1;//1，2，3，4，5
@@ -358,13 +374,14 @@ export default class People {
     protected keepTowerdData() : void
     {
         //存储现在点到目标角度
-        let pX = this.sp.x;
-        let pY = this.sp.y;
-        // let tX = this.targetNode.x;
-        // let tY = this.targetNode.y;
-        let tX = 200;
-        let tY = 600;
-        this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
+        // console.log(this);
+        this.toward.targetRotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,this.targetNode.x,this.targetNode.y);
+    }
+
+    /**在运行移动逻辑之前 的特殊操作 */
+    protected specialDo() : void
+    {
+        
     }
 ///////////////////////////////////////////////////////////////////////////////////
     /***
@@ -378,6 +395,7 @@ export default class People {
                 this.outPeople_ToDoor();
             }else{
                 //出城方法
+                this.peopleOut();
             }
     }
 
@@ -406,11 +424,84 @@ export default class People {
         Laya.timer.frameLoop(1,this,this.moveDistance);
         Laya.timer.frameLoop(1,this,this.checkLimit_Out);
     }
+
+   /**出城逻辑 */
+   protected peopleOut() : void
+   {
+        this.setTraget(this.view.getChildByName("sp_door") as Laya.Sprite);//设置目标是门
+   }
+
+   /**进城方法 从正门到某一个住宅*/
+   protected peopleInto() : void
+   {
+        let bornNode = this.view.getChildByName("sp_door") as Laya.Sprite;
+        let houseNode = this.view.getChildByName("house");
+        let targetNode : Laya.Sprite = this.getTargePos(houseNode);
+        this.setPos(bornNode.x,bornNode.y + 40,bornNode);
+        this.setTraget(targetNode);
+   }
+
+   /**从house中获取 一个随机的点 */
+   protected getTargePos(houseNode) : Laya.Sprite
+   {
+        let random = Math.random();
+        let index = Math.floor(((houseNode as Laya.Sprite)._children.length-1)*random);
+        let targetNode :Laya.Sprite;
+        // console.log(" --------- getTarget ");
+        // console.log("index ::" + index);
+        if(index >= 0)
+        {
+            targetNode = houseNode.getChildByName("house_"+index);
+            if(targetNode)
+            {
+                return targetNode;
+            }
+            return this.getTargePos(houseNode);
+        }
+        console.log("随机数取错");
+        // this.getTargePos(houseNode);
+   }
+
     /**人消失 */
     protected destoryPeople() : void
     {
+        Laya.Pool.recover(this.type,this);        
         this.sp.visible = false;
         Laya.Pool.recover(this.type,this);
         Laya.timer.clearAll(this);
+        //
+        if(!this.isOut) this.destoryInner();
+    }
+
+    /**墙内人删除 特殊处理 */
+    protected destoryInner() : void
+    {
+        //计时器清楚
+        Laya.timer.clear(this,this.people_PosInner);
+        switch(this.type)
+        {
+            case GameConfig.COMMON_MAN:
+                if(CountryData.ins_.alreadyCreate[0]>0)
+                CountryData.ins_.alreadyCreate[0]--;
+                return;
+            case GameConfig.BANDIT_MAN:
+                if(CountryData.ins_.alreadyCreate[3]>0)
+                CountryData.ins_.alreadyCreate[3]--;
+                return;
+            case GameConfig.ROBBER_MAN:
+                if(CountryData.ins_.alreadyCreate[4]>0)
+                CountryData.ins_.alreadyCreate[4]--;
+                return;
+            case GameConfig.SCIENTIST_MAN:
+                if(CountryData.ins_.alreadyCreate[1]>0)
+                CountryData.ins_.alreadyCreate[1]--;
+                return;
+            case GameConfig.STAR_MAN:
+                if(CountryData.ins_.alreadyCreate[2]>0)
+                CountryData.ins_.alreadyCreate[2]--;
+                return;
+        }
+        // console.log(CountryData.ins_.alreadyCreate);
+        
     }
 }

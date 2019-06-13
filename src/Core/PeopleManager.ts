@@ -14,8 +14,6 @@ export default class PeopleManager {
     /**纵坐标 */
     private Y:number;
     //------------------------------------------墙内
-    /**已生成的人种  0 普通   1科学家  2明星 3土匪 4盗贼*/
-    private alreadyCreate : Array<number> = [0,0,0,0,0];
     /**生成间隔计时器 */
     private countTime : number = 0;
     /**生产时间间隔 */
@@ -95,6 +93,7 @@ export default class PeopleManager {
             }
         }
         people.visible=true;
+        people.isOut = true;
         this.getPos();
         people.setPos(this.X,this.Y);
         people.openBehaviour();
@@ -163,34 +162,40 @@ export default class PeopleManager {
     private create_Inner(randomString) : void
     {
         if(randomString == "none") return;
-        let people;
+        let people = Laya.Pool.getItem(randomString);  
+        let countryData = CountryData.ins_;
         //生产人种
         switch(randomString)
         {    /**已生成的人种  0 普通   1科学家  2明星 3土匪 4盗贼*/
-            case GameConfig.COMMON_MAN:     
-                people = new Common(this.view,randomString,false);
-                this.alreadyCreate[0]++;
+            case GameConfig.COMMON_MAN:   
+                if(!people) people = new Common(this.view,randomString,false);
+                countryData.alreadyCreate[0]++;
                 break;
             case GameConfig.ROBBER_MAN://盗贼
-                people = new Common(this.view,randomString,false);
-                this.alreadyCreate[4]++;
+                if(!people) people = new Common(this.view,randomString,false);
+                countryData.alreadyCreate[4]++;
                 break;
             case GameConfig.BANDIT_MAN://土匪
-                people = new Common(this.view,randomString,false);
-                this.alreadyCreate[3]++;
+                if(!people) people = new Common(this.view,randomString,false);
+                countryData.alreadyCreate[3]++;
                 break;
             case GameConfig.STAR_MAN://明星
-                people = new Common(this.view,randomString,false);
-                this.alreadyCreate[2]++;
+                if(!people) people = new Common(this.view,randomString,false);
+                countryData.alreadyCreate[2]++;
                 break;
             case GameConfig.SCIENTIST_MAN://科学家
-                people = new Common(this.view,randomString,false);
-                this.alreadyCreate[1]++;
+                if(!people) people = new Common(this.view,randomString,false);
+                countryData.alreadyCreate[1]++;
                 break;
         }
+        if(!people) {console.log("新建人失败！") ;return;}
+        people.isOut = false;
         CountryData.ins_.arr_inPeople.push(people);//加入维护数组
         if(people === undefined || people === null) {console.log("没有生成人种！种类:" + randomString);return;}
-        this.createPos(people); 
+        this.createPos(people);
+        people.specialDo();
+        people.openBehaviour();
+        
     }
 
     /**生产位置 */
@@ -206,7 +211,7 @@ export default class PeopleManager {
             if(house !== undefined && house !== null)  
             {
                 people.setPos(house.x,house.y,house);   
-                people.openBehaviour()       
+                // people.peopleInto(); 
                 return;
             }
         }
@@ -229,6 +234,7 @@ export default class PeopleManager {
         let index = undefined;
         for(let i=0;i<arrPercent.length ;i++)
         {
+            if(!arrPercent[i+1]) break;
             if(arrPercent[i] <= number && number < arrPercent[i+1])
             {
                 person = CountryData.ins_.arr_People[i];
@@ -236,10 +242,11 @@ export default class PeopleManager {
                 break;
             }
         }
+        if(!person) {console.log("人种随机失败！");return;}
         // console.log(person);
         //判断人是否还能生成
         if(index === undefined){console.log("概率计算出错");return;}
-        if(this.alreadyCreate[index] == CountryData.ins_[person])
+        if(CountryData.ins_.alreadyCreate[index] == CountryData.ins_[person])
         {
             if(this.getAlreadCreate() == CountryData.ins_.population) return;
             person = this.getRandom(arrPercent);     
@@ -251,9 +258,9 @@ export default class PeopleManager {
     public getAlreadCreate() : number
     {
         let number = 0;
-        for(let i=0;i<this.alreadyCreate.length;i++)
+        for(let i=0;i<CountryData.ins_.alreadyCreate.length;i++)
         {
-            number +=this.alreadyCreate[i]
+            number +=CountryData.ins_.alreadyCreate[i]
         }
         return number;
     }
