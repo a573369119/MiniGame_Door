@@ -197,7 +197,7 @@ export default class People {
                 //城外人口-1
                 OutCountryData.ins_.outCount--;
                 //国家人口+1
-                CountryData.ins_.population++;
+                CountryData.ins_.cal_MainData(GameConfig.MAIN_POPULATION,1);
             }
             
         }
@@ -223,7 +223,7 @@ export default class People {
     /**towerd转化成位移 */
     protected towedToMove() : void
     {
-        this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,1000,800);;
+        this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,1000,412.5);;
         this.peopleTowerd();//让目标朝向计算数
     }
 
@@ -351,7 +351,7 @@ export default class People {
         // let tX = this.targetNode.x;
         // let tY = this.targetNode.y;
         let tX = 1000;
-        let tY = 800;
+        let tY = 412.5;
         this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
     }
 

@@ -2,4 +2,7 @@
    <item name="GameWorld.scene" props="" ifExport="分离模式" aName=""/>
    <item name="Dialog/BeCurrent.scene" props="" ifExport="分离模式" aName=""/>
    <item name="Dialog/CurrentDialog.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="Dialog/BuyDialog.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="Buy.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="Dia/CurrentDialog.scene" props="" ifExport="分离模式" aName=""/>
 </page>

@@ -3,7 +3,7 @@ import { ui } from "../ui/layaMaxUI";
 /**
  * 消息框 通用
  */
-export default class MsgDialog extends ui.Dialog.CurrentDialogUI{
+export default class MsgDialog extends ui.Dia.CurrentDialogUI{
     /**类型 */
     private type : number ;
     /**缓动 */

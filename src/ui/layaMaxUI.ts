@@ -2,20 +2,19 @@
 import View=Laya.View;
 import Dialog=Laya.Dialog;
 import Scene=Laya.Scene;
-export module ui.Dialog {
-    export class CurrentDialogUI extends Scene {
-		public msgBody:Laya.Sprite;
-		public sprite_Person:Laya.Sprite;
-		public sprite_Msg:Laya.Sprite;
+export module ui {
+    export class BuyUI extends Dialog {
+		public bg:Laya.Sprite;
+		public btn_buy:Laya.Sprite;
+		public buy_name:laya.display.Text;
+		public buy_input:Laya.TextInput;
 		public btn_close:Laya.Sprite;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
-            this.loadScene("Dialog/CurrentDialog");
+            this.loadScene("Buy");
         }
     }
-}
-export module ui {
     export class GameWorldUI extends Scene {
 		public sp_scene:Laya.Sprite;
 		public sp_ground:Laya.Sprite;
@@ -64,10 +63,24 @@ export module ui {
 		public house_37:Laya.Sprite;
 		public army:Laya.Sprite;
 		public sp_UI:Laya.Sprite;
+		public btn_buy:Laya.Sprite;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
             this.loadScene("GameWorld");
+        }
+    }
+}
+export module ui.Dia {
+    export class CurrentDialogUI extends Scene {
+		public msgBody:Laya.Sprite;
+		public sprite_Person:Laya.Sprite;
+		public sprite_Msg:Laya.Sprite;
+		public btn_close:Laya.Sprite;
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.loadScene("Dia/CurrentDialog");
         }
     }
 }

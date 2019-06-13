@@ -1,3 +1,5 @@
+import GameConfig from "../Config/GameConfig";
+
 /**
  * 数据中心 所有的数据
  */
@@ -5,22 +7,24 @@ export default class CountryData{
     public static ins_ : CountryData = new CountryData();
     /**************主数据********************/
     /**国家财政 */
-    public gold : number = 10000;
-    /**国家幸福度 */
-    public popularSupport : number = 90;
+    public money : number = 10000;
     /**国家人口 */
     public population : number=1;
+    /**国家幸福度 */
+    public popularSupport : number = 50;
     /**国家科技 */
-    public technology : number = 90;
+    public technology : number = 10;
     /**国家声望 */
     public prestige : number = 90;
 
     /***************副数据*****************/
     //--------普通数据
-    /**粮食产量 */
-    public grainYield : number = 1000;
-    /**粮食消耗 */
-    public grainConsumption : number =1000;
+    /**今日粮食产量 */
+    public grainAdd : number = 1000;
+    /**今日粮食消耗 */
+    public grainMinus : number =1000;
+    /**粮食库存 */
+    public grainStock:number=100;
 
     //--------事件数据
     /**瘟疫  0 1 2 3 4 5 0-是没发生*/
@@ -56,13 +60,17 @@ export default class CountryData{
     // public keepSelect : Array<number> = [];
     //------------------------------------------
     /**普通人中 医生的占比*/
-    public percentDoctor : number = 0.2;
+    public percentDoctor : number = 0.02;
     /**普通人种 警察占比 */
-    public percentPolic : number = 0.1;
+    public percentPolic : number = 0.04;
     /**普通人种 商人的占比 */
-    public percentShoper : number = 0.6;
+    public percentShoper : number = 0.1;
     /**游手好闲 */
     public percentNothing : number = 0.1;
+    /**农民 */
+    public farmer : number = 0.7;
+    /**流动比例 */
+    public percent:number=1;
 
     //-----------------------------------------目标点
     /**目标点 医院 */
@@ -82,11 +90,15 @@ export default class CountryData{
     /**墙内区域划分 */
     public arr_LeftArea : Array<any>;
     public arr_RightArea : Array<any>;
-
-
-
-    /**流动比例 */
-    public percent:number=1;
+    
+    //---------------峰值
+    /**国家幸福度峰值 */
+    public popularSupportMax : number = 100;
+    /**国家科技峰值 */
+    public technologyMax : number = 100;
+    /**国家声望峰值 */
+    public prestigeMax : number = 100;
+    
 
     constructor(){
         this.arr_LeftArea = new Array<any>();
@@ -138,11 +150,33 @@ export default class CountryData{
         else return this[type]/(this.population);
     }
 
-    /**数据结算  综合计算所有的数值*/
-    // private 
 
+    //----------------------------------------结算
+    /**五大主值结算 */
+    public cal_MainData(type:string,count:number):void
+    {
+        switch(type)
+        {
+            case "money":
+                this.money+=count;
+                break;
+            case "population":
+                this.population+=count;
+                break;
+            case "popularSupport":
+                this.popularSupport+=count;
+                break;
+            case "technology":
+                this.technology+=count;
+                break;
+            case "prestige":
+                this.prestige+=count;
+                break;
+        }
+    }
 
-
+    
+    
 }
 
 /**外城 */
