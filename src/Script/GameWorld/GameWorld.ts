@@ -40,6 +40,7 @@ export default class GameWorld extends ui.GameWorldUI{
         this.addEvent();//给桥添加事件 
         this.screenSetting();//屏幕居中
         this.gameStart();//游戏流程开始
+        DataManager.ins_.setArea(this.sp_scene.getChildByName("house"));
     }
 
     /**数据初始化 */
@@ -56,6 +57,9 @@ export default class GameWorld extends ui.GameWorldUI{
     /**添加事件 */
     private addEvent() : void
     {
+        // this.stage.on(Laya.Event.CLICK,this,function(e){
+        //     console.log(e);
+        // })
         this.sp_scene.on(Laya.Event.MOUSE_DOWN,this,this.mouseDown);
         this.sp_scene.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
         this.sp_scene.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);

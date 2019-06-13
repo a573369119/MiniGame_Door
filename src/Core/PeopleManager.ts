@@ -198,7 +198,8 @@ export default class PeopleManager {
             house = houseNode.getChildByName("house_"+number);
             if(house !== undefined && house !== null)  
             {
-                people.setPos(house.x,house.y);          
+                people.setPos(house.x,house.y,house);   
+                people.openBehaviour()       
                 return;
             }
         }
@@ -212,7 +213,7 @@ export default class PeopleManager {
             this.countTime++;
             return;
         }
-        this.countTime_ = Math.random()*3*100;
+        this.countTime_ = Math.random()*GameConfig.PERSON_CREATE_TIME*100;
         console.log("生成间隔:" + Math.floor(this.countTime/100) + "s");
         this.countTime = 0;
 

@@ -9,7 +9,7 @@ export default class CountryData{
     /**国家幸福度 */
     public popularSupport : number = 90;
     /**国家人口 */
-    public population : number=100;
+    public population : number=1;
     /**国家科技 */
     public technology : number = 90;
     /**国家声望 */
@@ -33,15 +33,15 @@ export default class CountryData{
     //--------职业人数
     public arr_People : Array<string> = ["common","scientist","star","bandit","robber"];
     /**普通人 A  普通人中会产生医生 警察 等正常职业*/
-    public common : number = 92;
+    public common : number = 1;
     /**科学家 SSS*/
-    public scientist : number = 3;
+    public scientist : number = 0;
     /**明星 SS*/
-    public star : number = 3;
+    public star : number = 0;
     /**土匪 -S */
-    public bandit : number = 1;
+    public bandit : number = 0;
     /**盗贼 -A */
-    public robber : number = 1;
+    public robber : number = 0;
     
     //--------城门
     /**门是否打开*/
@@ -64,16 +64,59 @@ export default class CountryData{
     /**游手好闲 */
     public percentNothing : number = 0.1;
 
+    //-----------------------------------------目标点
+    /**目标点 医院 */
+    public posHospital : any = {x: 389,y:541}; 
+    /**目标点 农场 */
+    public posFarm : any = {x: 132,y:709}; 
+    /**目标点 新闻房*/
+    public posEventHouse : any = {x: 591.5,y:729}; 
+    /**皇宫 */
+    public posPalace : any = {x: 981,y:817}; 
+    /**科技 */
+    public posTechnology : any = {x: 1466,y:621}; 
+    /**军队 */
+    public posArmy : any = {x: 1874,y:707}; 
+
+    //----------------------------------------区域
+    /**墙内区域划分 */
+    public arr_LeftArea : Array<any>;
+    public arr_RightArea : Array<any>;
+
+
 
     /**流动比例 */
     public percent:number=1;
 
     constructor(){
-
+        this.arr_LeftArea = new Array<any>();
+        this.arr_RightArea = new Array<any>();
     }
 
     onEnable(){
+        
+    }
 
+    /**获取区域 */
+    public setArea(view : Laya.Node) : void
+    {
+        let children = view._children;
+        for(let i=0;i<children.length;i++)
+        {
+            if(children[i].name == "palace")
+            {
+                this.arr_LeftArea.push(children[i]);
+                this.arr_RightArea.push(children[i]);                
+            }
+            else if(children[i].x<981)
+            {
+                this.arr_LeftArea.push(children[i]);
+            }
+            else
+            {
+                this.arr_RightArea.push(children[i]);
+            }
+        }
     }
 
     /**

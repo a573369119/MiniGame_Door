@@ -1,5 +1,7 @@
 import GameConfig from "../Config/GameConfig";
 import CountryData, { OutCountryData } from "../Core/DataManager";
+import Tool from "../Tool/Tool";
+import DataManager from "../Core/DataManager";
 
 /**
  * 
@@ -14,26 +16,51 @@ export default class People {
     private dirX:number;
     /**纵坐标移动速度 */
     private dirY:number;
+    
+    /*******************墙内 ************/
     /**墙内人还是墙外人 */
     public isOut : boolean;
     /**人属性 */
     public type:string;
     /**人的朝向 */
     public toward : any;
+    /**面前的5个检测点 */
+    public towardPos : Array<any>;
+    /**人的移动目标点 */
+    public targetNode : Laya.Sprite;
+    /**出生点 */
+    public bornNode : Laya.Sprite;
+
+
 
     constructor(view,type:string,isOut){
         this.view = view;
         this.isOut = isOut;
         this.type=type;
         this.init(type);
-        this.toward = {x:0,y:0};
     }
 
     /**初始化 */
     private init(type) : void
     {
+        //数据初始化
+        this.setDataInit();
         //创建
         this.createPeople(type);
+    }
+
+    /**数据初始化 */
+    private setDataInit() : void
+    {
+        this.toward = {
+            x:1000,
+            y:0,
+            speed:GameConfig.TEST_POINT_SPEED,rotation:undefined,
+            targetRotation:undefined,
+            rotationChange : 0
+        };
+        this.towardPos = new Array();
+        
     }
 
     /**开始行动 */
@@ -73,11 +100,12 @@ export default class People {
     }
 
     /**设置初始位置 */
-    public setPos(x:number,y:number):void
+    public setPos(x,y,sp:Laya.Sprite):void
     {
         this.sp.visible = true;
         this.sp.x = x;
         this.sp.y = y;
+        this.bornNode = sp;
     }
 
     /******************************墙外人行动逻辑*******************************************/
@@ -140,14 +168,6 @@ export default class People {
         Laya.timer.frameLoop(1,this,this.checkLimit_Out);
     }
 
-    /**墙内人行动逻辑*/
-    /********************************************************墙内人行动逻辑*****************************************/
-    private people_PosInner() : void
-    {
-
-    }
-    
-
     /**碰撞检测 */
     private checkLimit_Out():void
     {
@@ -183,8 +203,160 @@ export default class People {
         }
     }
 
+    /**墙内人行动逻辑*/
+    /********************************************************墙内人行动逻辑*****************************************/
+    protected people_PosInner() : void
+    {
+
+        // this.towedToMove();
+    }
+
+    public setTraget(target:Laya.Sprite) : void
+    {
+        // this.targetNode = target;
+        //测试
+        this.targetNode = (this.view.getChildByName("palace") as Laya.Sprite);
+        this.toward.x = target.x;
+        this.toward.y = target.y;
+    }
+
+    /**towerd转化成位移 */
+    protected towedToMove() : void
+    {
+        this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,1000,800);;
+        this.peopleTowerd();//让目标朝向计算数
+    }
+
+    /**朝向  towerd移动 */
+    private posMove() : void
+    {
+        this.sp.x += this.toward.speed*Tool.rotationSet(this.toward.rotation,"sin");
+        this.sp.y += this.toward.speed*Tool.rotationSet(this.toward.rotation,"cos");
+        this.sp.rotation = this.toward.rotation;
+        // console.log(this.sp.rotation);
+    }
+    
+    /**人面向 */
+    protected peopleTowerd() : void
+    {
+        this.getTowerdPos();//获得五个点，根据目标坐标计算
+        this.testTowerd();//检测是否符合要求 不符合 + - 5
+    }
+
+    /**检测行走方向 */
+    protected testTowerd() : boolean
+    {
+        let power = this.testColider();// -1 0 1 2 3 4 5
+        if(power > 0)
+        {//撞到了需要转方向
+            this.toward.rotationChange = 0;
+            this.speedCtr(power);
+            this.judgeLeftRight(power);        
+            this.posMove();//移动
+            return false;
+        }
+        this.findTarget();
+        this.toward.speed = GameConfig.TEST_POINT_SPEED;      
+        this.posMove();//移动  
+        return true;
+    }
+
+    /**速度控制 */
+    private speedCtr(power) : void
+    {
+        if(power == 0 || power == 1) this.toward.speed = 0.2;
+            else this.toward.speed = GameConfig.TEST_POINT_SPEED*0.035*power*power; 
+        console.log("speed ::" + this.toward.speed);
+    }
+
+    /**判断方向 */
+    protected judgeLeftRight(power) : void
+    {
+        this.toward.rotationChange += 5;
+        let ro1 = this.toward.rotation - this.toward.rotationChange;
+        let ro2 = this.toward.rotation + this.toward.rotationChange;
+        this.getTowerdPos(ro1);
+        let numRo1 = this.testColider();
+        this.getTowerdPos(ro2);
+        let numRo2 = this.testColider();
+        if(numRo1 == -1) {this.toward.rotation = ro1; return;}
+        if(numRo2 == -1) {this.toward.rotation = ro2; return;}
+        this.judgeLeftRight(power);
+    }
+
+    /**findTarget寻找目标 */
+    private findTarget() : void
+    {
+        let Ca = this.toward.rotation - this.toward.targetRotation;
+        if(Ca > 0) this.toward.rotation += 5;
+            else if( Ca < 0 ) this.toward.rotation -=5;
+        if( Math.abs(Ca) < 5) this.toward.rotation += Ca;
+    }   
+
+    /**检测是否碰撞 撞到了返回ture -1可以走 0以上表示碰撞到哪个点*/
+    protected testColider() : number
+    {
+        let num = -1;
+        let area : Array<Laya.Sprite>= DataManager.ins_.arr_RightArea;
+        if(this.sp.x<981) area = DataManager.ins_.arr_LeftArea;
+        for(let i=0;i<area.length;i++)
+        {
+            if(Tool.blockTest(this.bornNode,this.sp)) 
+                {return -1;}
+            if(Tool.blockTest(area[i],this.sp)){return 0;}//如果已经撞上了。             
+            for(let h = 0;h<this.towardPos.length;h++)
+            {//五个点检测
+                if(Tool.blockTest(area[i],this.towardPos[h]))
+                {//离人最近的点
+                    num = h+1;//1，2，3，4，5
+                    return num;
+                }
+            }
+        }
+        return num;
+    }
+
+    /**人面向的五个检测点 */
+    protected getTowerdPos(rotationTest?) : void
+    {
+        let rotation = this.toward.rotation;//使用当前面向
+        if(rotationTest) rotation = rotationTest;
+        else this.keepTowerdData();//保存 现在为止到目标点的角度
+        if(rotation === undefined) 
+        {//如果角度是undef
+            rotation = this.toward.targetRotation//目标角度，初始角度   
+            this.toward.rotation = rotation;
+        }
+
+        //位移需要的变量
+        let cos : number = Tool.rotationSet(rotation,"cos");
+        let sin : number = Tool.rotationSet(rotation,"sin");
+
+        // console.log("---------------x::" + this.sp.x + "y::" + this.sp.y);
+        for(let i=0;i<5;i++)//记录五个
+        { 
+            if(!this.towardPos[i]) this.towardPos[i] = {};        
+            this.towardPos[i].x = this.sp.x + GameConfig.TEST_POINT_DIC*sin*(i+1);
+            this.towardPos[i].y = this.sp.y + GameConfig.TEST_POINT_DIC*cos*(i+1); 
+        }
+        // console.log(this.towardPos);
+    }
+
+    /**保存 tower信息 */
+    protected keepTowerdData() : void
+    {
+        //存储现在点到目标角度
+        let pX = this.sp.x;
+        let pY = this.sp.y;
+        // let tX = this.targetNode.x;
+        // let tY = this.targetNode.y;
+        let tX = 1000;
+        let tY = 800;
+        this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
+    }
+
     /**人消失 */
-    private destoryPeople() : void
+    protected destoryPeople() : void
     {
         this.sp.visible = false;
         Laya.timer.clearAll(this);
