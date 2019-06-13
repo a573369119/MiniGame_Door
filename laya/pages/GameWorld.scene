@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":10,
-    "selecteID":59,
+    "selectedBox":96,
+    "selecteID":99,
     "searchKey":"Scene",
-    "props":{"width":2000,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
+    "props":{"width":1440,"sceneColor":"#000000","runtime":"Script/GameWorld/GameWorld.ts","height":900},
     "nodeParent":-1,
-    "maxID":62,
+    "maxID":100,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -57,8 +57,8 @@
                 },
                 {
                     "type":"Sprite",
-                    "searchKey":"Sprite,sp_wall,sp_wall",
-                    "props":{"y":450,"x":0,"width":2000,"var":"sp_wall","texture":"map/wall.png","pivotY":10,"name":"sp_wall","height":20},
+                    "searchKey":"Sprite,sp_wall",
+                    "props":{"y":450,"x":0,"width":2000,"var":"sp_wall","texture":"map/wall.png","pivotY":10,"height":20},
                     "nodeParent":8,
                     "label":"sp_wall",
                     "isDirectory":false,
@@ -86,7 +86,7 @@
                 {
                     "type":"Sprite",
                     "searchKey":"Sprite,house,house",
-                    "props":{"y":0,"x":0,"width":2000,"var":"house","name":"house","height":900},
+                    "props":{"y":1,"x":1,"width":1999,"var":"house","name":"house","height":899},
                     "nodeParent":8,
                     "label":"house",
                     "isOpen":true,
@@ -96,7 +96,6 @@
                     "compId":25,
                     "child":[
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_1,house_1",
                             "props":{"y":566,"x":865,"width":49,"var":"house_1","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_1","height":49},
@@ -111,7 +110,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_2,house_2",
                             "props":{"y":666,"x":1219,"width":49,"var":"house_2","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_2","height":49},
@@ -126,7 +124,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_3,house_3",
                             "props":{"y":566,"x":745,"width":49,"var":"house_3","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_3","height":49},
@@ -141,7 +138,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_4,house_4",
                             "props":{"y":572,"x":1219,"width":49,"var":"house_4","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_4","height":49},
@@ -156,7 +152,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_5,house_5",
                             "props":{"y":666,"x":865,"width":49,"var":"house_5","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_5","height":49},
@@ -171,7 +166,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_6,house_6",
                             "props":{"y":666,"x":1113,"width":49,"var":"house_6","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_6","height":49},
@@ -186,7 +180,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_8,house_8",
                             "props":{"y":572,"x":1113,"width":49,"var":"house_8","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_8","height":49},
@@ -201,7 +194,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_9,house_9",
                             "props":{"y":666,"x":745,"width":49,"var":"house_9","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_9","height":49},
@@ -216,12 +208,11 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,eventHouse,eventHouse",
-                            "props":{"y":800,"x":632,"width":80,"var":"eventHouse","texture":"map/house.png","pivotY":71,"pivotX":40,"name":"eventHouse","hitTestPrior":true,"height":142},
+                            "searchKey":"Sprite,house_10",
+                            "props":{"y":730,"x":607,"var":"house_10","texture":"map/house.png"},
                             "nodeParent":25,
-                            "label":"eventHouse",
+                            "label":"house_10",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
@@ -231,7 +222,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_11,house_11",
                             "props":{"y":666,"x":632,"width":49,"var":"house_11","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_11","height":49},
@@ -246,7 +236,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_12,house_12",
                             "props":{"y":566,"x":632,"width":49,"var":"house_12","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_12","height":49},
@@ -261,7 +250,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_13,house_13",
                             "props":{"y":755,"x":1314,"width":49,"var":"house_13","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_13","height":49},
@@ -276,7 +264,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_14,house_14",
                             "props":{"y":666,"x":1314,"width":49,"var":"house_14","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_14","height":49},
@@ -291,7 +278,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_15,house_15",
                             "props":{"y":572,"x":1314,"width":49,"var":"house_15","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_15","height":49},
@@ -306,10 +292,9 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,palace,palace",
-                            "props":{"y":817,"x":981,"width":524,"var":"palace","texture":"map/house.png","pivotY":87,"pivotX":262,"name":"palace","hitTestPrior":true,"height":174},
+                            "searchKey":"Sprite,palace",
+                            "props":{"y":817,"x":981,"width":524,"var":"palace","texture":"map/house.png","pivotY":87,"pivotX":262,"hitTestPrior":true,"height":174},
                             "nodeParent":25,
                             "label":"palace",
                             "isDirectory":false,
@@ -321,10 +306,9 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,hospital,hospital",
-                            "props":{"y":615,"x":463,"width":148,"var":"hospital","texture":"map/house.png","pivotY":74,"pivotX":74,"name":"hospital","hitTestPrior":true,"height":148},
+                            "searchKey":"Sprite,hospital",
+                            "props":{"y":541,"x":389,"width":148,"var":"hospital","texture":"map/house.png","hitTestPrior":true,"height":148},
                             "nodeParent":25,
                             "label":"hospital",
                             "isDirectory":false,
@@ -336,7 +320,20 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,house_16",
+                            "props":{"y":816,"x":607,"var":"house_16","texture":"map/house.png"},
+                            "nodeParent":25,
+                            "label":"house_16",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":30,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        },
+                        {
                             "type":"Sprite",
                             "searchKey":"Sprite,house_17,house_17",
                             "props":{"y":755,"x":513,"width":49,"var":"house_17","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_17","height":49},
@@ -351,7 +348,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_18,house_18",
                             "props":{"y":841,"x":513,"width":49,"var":"house_18","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_18","height":49},
@@ -366,7 +362,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_19,house_19",
                             "props":{"y":755,"x":414,"width":49,"var":"house_19","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_19","height":49},
@@ -381,7 +376,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_20,house_20",
                             "props":{"y":841,"x":414,"width":49,"var":"house_20","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_20","height":49},
@@ -396,10 +390,9 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,technology,technology",
-                            "props":{"y":621,"x":1466,"width":148,"var":"technology","texture":"map/house.png","pivotY":74,"pivotX":74,"name":"technology","hitTestPrior":true,"height":148},
+                            "searchKey":"Sprite,technology",
+                            "props":{"y":621,"x":1466,"width":148,"var":"technology","texture":"map/house.png","pivotY":74,"pivotX":74,"hitTestPrior":true,"height":148},
                             "nodeParent":25,
                             "label":"technology",
                             "isDirectory":false,
@@ -411,7 +404,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_0,house_0",
                             "props":{"y":841,"x":1314,"width":49,"var":"house_0","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_0","height":49},
@@ -426,7 +418,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_21,house_21",
                             "props":{"y":755,"x":1417,"width":49,"var":"house_21","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_21","height":49},
@@ -441,7 +432,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_22,house_22",
                             "props":{"y":841,"x":1417,"width":49,"var":"house_22","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_22","height":49},
@@ -456,7 +446,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_23,house_23",
                             "props":{"y":754,"x":1516,"width":49,"var":"house_23","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_23","height":49},
@@ -471,7 +460,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_24,house_24",
                             "props":{"y":841,"x":1516,"width":49,"var":"house_24","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_24","height":49},
@@ -486,7 +474,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_25,house_25",
                             "props":{"y":566,"x":302,"width":49,"var":"house_25","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_25","height":49},
@@ -501,7 +488,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_26,house_26",
                             "props":{"y":665,"x":302,"width":49,"var":"house_26","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_26","height":49},
@@ -516,7 +502,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_27,house_27",
                             "props":{"y":755,"x":302,"width":49,"var":"house_27","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_27","height":49},
@@ -531,7 +516,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_28,house_28",
                             "props":{"y":841,"x":302,"width":49,"var":"house_28","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_28","height":49},
@@ -546,10 +530,9 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,farm,farm",
-                            "props":{"y":709,"x":132,"width":221,"var":"farm","texture":"map/house.png","pivotY":168,"pivotX":111,"name":"farm","hitTestPrior":true,"height":335},
+                            "searchKey":"Sprite,farm",
+                            "props":{"y":709,"x":132,"width":221,"var":"farm","texture":"map/house.png","pivotY":168,"pivotX":111,"hitTestPrior":true,"height":335},
                             "nodeParent":25,
                             "label":"farm",
                             "isDirectory":false,
@@ -561,7 +544,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_30,house_30",
                             "props":{"y":572,"x":1610,"width":49,"var":"house_30","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_30","height":49},
@@ -576,7 +558,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_31,house_31",
                             "props":{"y":671,"x":1610,"width":49,"var":"house_31","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_31","height":49},
@@ -591,7 +572,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_32,house_32",
                             "props":{"y":754,"x":1610,"width":49,"var":"house_32","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_32","height":49},
@@ -606,7 +586,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_33,house_33",
                             "props":{"y":841,"x":1610,"width":49,"var":"house_33","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_33","height":49},
@@ -621,7 +600,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_34,house_34",
                             "props":{"y":671,"x":1713,"width":49,"var":"house_34","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_34","height":49},
@@ -636,7 +614,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_35,house_35",
                             "props":{"y":572,"x":1713,"width":49,"var":"house_35","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_35","height":49},
@@ -651,7 +628,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_36,house_36",
                             "props":{"y":755,"x":1713,"width":49,"var":"house_36","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_36","height":49},
@@ -666,7 +642,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite,house_37,house_37",
                             "props":{"y":841,"x":1713,"width":49,"var":"house_37","texture":"map/house.png","pivotY":25,"pivotX":25,"name":"house_37","height":49},
@@ -681,10 +656,9 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
-                            "searchKey":"Sprite,army,army",
-                            "props":{"y":707,"x":1874,"width":194,"var":"army","texture":"map/house.png","pivotY":160,"pivotX":97,"name":"army","hitTestPrior":true,"height":319},
+                            "searchKey":"Sprite,army",
+                            "props":{"y":707,"x":1874,"width":194,"var":"army","texture":"map/house.png","pivotY":160,"pivotX":97,"hitTestPrior":true,"height":319},
                             "nodeParent":25,
                             "label":"army",
                             "isDirectory":false,
@@ -715,33 +689,217 @@
                 {
                     "x":30,
                     "type":"Sprite",
-                    "searchKey":"Sprite,btn_buy",
-                    "props":{"y":66.75,"x":117.5,"width":159,"var":"btn_buy","texture":"map/bg.png","pivotY":28,"pivotX":78,"hitTestPrior":true,"height":53},
+                    "searchKey":"Sprite,img_population",
+                    "props":{"y":16,"x":6,"width":51,"var":"img_population","texture":"map/bg.png","height":50},
                     "nodeParent":10,
-                    "label":"btn_buy",
-                    "isOpen":false,
+                    "label":"img_population",
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":59,
+                    "compId":71,
                     "child":[
                         {
                             "x":45,
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"y":0,"x":0,"width":158,"text":"购买","height":55,"fontSize":36,"font":"Microsoft YaHei","align":"center"},
-                            "nodeParent":59,
-                            "label":"Text",
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":71,
+                            "label":"Sprite",
                             "isOpen":true,
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":60,
+                            "compId":72,
                             "child":[
-                                ],
-                            "$HIDDEN":false
-                        }],
-                    "$HIDDEN":false
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_population",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_population","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":71,
+                            "label":"text_count_population",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":73,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_popularSupport",
+                    "props":{"y":16,"x":226,"width":51,"var":"img_popularSupport","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_popularSupport",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":80,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":80,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":81,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_popularSupport",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_popularSupport","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":80,
+                            "label":"text_count_popularSupport",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":82,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_money",
+                    "props":{"y":16,"x":446,"width":51,"var":"img_money","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_money",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":88,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":88,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":89,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_money",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_money","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":88,
+                            "label":"text_count_money",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":90,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_technology",
+                    "props":{"y":16,"x":666,"width":51,"var":"img_technology","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_technology",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":92,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":92,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":93,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_technology",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_technology","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":92,
+                            "label":"text_count_technology",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":94,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,img_prestige",
+                    "props":{"y":16,"x":886,"width":51,"var":"img_prestige","texture":"map/bg.png","height":50},
+                    "nodeParent":10,
+                    "label":"img_prestige",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":96,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":0,"x":51,"width":99,"texture":"map/bg2.png","height":50},
+                            "nodeParent":96,
+                            "label":"Sprite",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":97,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_count_prestige",
+                            "props":{"y":0,"x":51,"width":97,"var":"text_count_prestige","valign":"middle","text":"3623","height":50,"fontSize":30,"font":"Microsoft YaHei","color":"#141414","align":"right"},
+                            "nodeParent":96,
+                            "label":"text_count_prestige",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":98,
+                            "child":[
+                                ]
+                        }]
                 }],
             "$HIDDEN":false
         }],

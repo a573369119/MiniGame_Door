@@ -68,8 +68,6 @@ export default class GameWorld extends ui.GameWorldUI{
         this.sp_scene.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);
         //给门帮点点击事   
         this.sp_door.on(Laya.Event.CLICK,this,this.doorCtr);
-        //购买按钮事件绑定
-        this.btn_buy.on(Laya.Event.CLICK,this,this.buyDialog_Click);
         //医馆事件绑定
         this.hospital.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.HOSPITAL]);
         //军队事件绑定
@@ -81,7 +79,7 @@ export default class GameWorld extends ui.GameWorldUI{
         //新闻点事件绑定
         //this.eventHouse.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.EVENT_HOUSE]);     
         //新闻皇宫绑定
-        this.palace.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.PALACE]);           
+        this.palace.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.PALACE]);
     }
 
     /**屏幕 局中*/
@@ -159,11 +157,28 @@ export default class GameWorld extends ui.GameWorldUI{
     }
 
     /**点击购买按钮 */
-    private buyDialog_Click():void
+    /*private buyDialog_Click(type:string):void
     {
-        console.log("Ze")
+        switch(type)
+        {
+            case GameConfig.MAIN_POPULATION:
+                this.buyDialog.buy_name.text="人口";
+                break;
+            case GameConfig.MAIN_POPULARSUPPORT:
+                this.buyDialog.buy_name.text="幸福度";
+                break;
+            case GameConfig.MAIN_MONEY:
+                this.buyDialog.buy_name.text="财政";
+                break;
+            case GameConfig.MAIN_TECHNOLOGY:
+                this.buyDialog.buy_name.text="科技";
+                break;
+            case GameConfig.MAIN_PRESTIGE:
+                this.buyDialog.buy_name.text="威望";
+                break;
+        }
         this.buyDialog.popup();
-    }
+    }*/
 
     //---------------------------粮食-------------
     /**粮食产出公式 */
@@ -179,7 +194,7 @@ export default class GameWorld extends ui.GameWorldUI{
     }
 
     /**粮食结算 */
-    public cal_Grain():void
+    /*public cal_Grain():void
     {
         //如果还有粮食库存
         if(CountryData.ins_.grainAdd>=CountryData.ins_.grainMinus)
@@ -214,7 +229,7 @@ export default class GameWorld extends ui.GameWorldUI{
                 CountryData.ins_.grainStock-=CountryData.ins_.grainMinus-CountryData.ins_.grainAdd;
             }
         }
-    }
+    }*/
 
     /**粮食换钱 */
     public exchangeMoney(grain:number):void

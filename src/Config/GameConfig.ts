@@ -44,8 +44,8 @@ export default class GameConfig {
     public static MAIN_POPULARSUPPORT : string = "popularSupport";
     /**国家科技 */
     public static MAIN_TECHNOLOGY : string = "technology";
-    /**国家声望 */
-    public PRESTIGE : string = "prestige";
+    /**国家威望 */
+    public static MAIN_PRESTIGE : string = "prestige";
 
 
     //----------------------------------其他

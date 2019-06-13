@@ -18,13 +18,47 @@ export default class CountryData{
     public prestige : number = 90;
 
     /***************副数据*****************/
-    //--------普通数据
-    /**今日粮食产量 */
-    public grainAdd : number = 1000;
-    /**今日粮食消耗 */
-    public grainMinus : number =1000;
+    //--------主数据影响
+    //固定支出
+    /**军费 */
+    public armyCost : number = 100;
+    /**政府费用 */
+    public governCost : number = 100;
+    /**科技费用 */
+    public technologyCost : number = 100;
+    /**税收率 */
+    public tax : number = 0.05;
+
+    //变动率
+    /**粮食消耗量 (人均消耗量) */
+    public grainCost : number = 1;
+    /**粮食产量 (人均产量)*/
+    public grainAdd : number = 1;
     /**粮食库存 */
-    public grainStock:number=100;
+    public grainStock:number=0;
+    /**军费减少率 */
+    public armyPercent:number=0.1;
+    /**GDP 挣钱能力，每人每天能产多少钱 */
+    public GDP : number = 10;
+
+
+    /**进城数 2min*/
+    public enterPeople : number = 50;
+    /**出城数 2min*/
+    public exitPeople : number = 50;
+    /**人口比例数 进城数/出城数 2min*/
+    public percent : number = 1;
+    //------------------------------------------
+    /**普通人中 医生的占比*/
+    public percentDoctor : number = 0.02;
+    /**普通人种 警察占比 */
+    public percentPolic : number = 0.04;
+    /**普通人种 商人的占比 */
+    public percentShoper : number = 0.1;
+    /**游手好闲 */
+    public percentNothing : number = 0.1;
+    /**农民 */
+    public farmer : number = 0.7;
 
     //--------事件数据
     /**瘟疫  0 1 2 3 4 5 0-是没发生*/
@@ -50,27 +84,12 @@ export default class CountryData{
     //--------城门
     /**门是否打开*/
     public isDoorOpen : boolean=true;
-    /**人口进入量 */
-    public enterPeople : number = 100;
-    /**人口流出量 */
-    public outerPeople : number = 100;
     /**筛查能力 启动特殊门的时候  筛查能力生效*/
     public preparation : number = 0.5;
     /**特殊门 筛查 1-防止进入   2-邀请进入*/
     // public keepSelect : Array<number> = [];
-    //------------------------------------------
-    /**普通人中 医生的占比*/
-    public percentDoctor : number = 0.02;
-    /**普通人种 警察占比 */
-    public percentPolic : number = 0.04;
-    /**普通人种 商人的占比 */
-    public percentShoper : number = 0.1;
-    /**游手好闲 */
-    public percentNothing : number = 0.1;
-    /**农民 */
-    public farmer : number = 0.7;
-    /**流动比例 */
-    public percent:number=1;
+
+    
 
     //-----------------------------------------目标点
     /**目标点 医院 */
@@ -137,7 +156,7 @@ export default class CountryData{
      */
     public get_PeopleMove() : number
     {
-        return this.enterPeople/this.outerPeople;
+        return this.percent;
     }
 
     /**
@@ -189,4 +208,32 @@ export class OutCountryData{
     public outCount:number=0;
     /**人滞留时间 */
     public limitTime:number=50;
+    //------------------------------------------
+    /**普通人*/
+    public common : number = 0.8;
+    /**科学家 SSS*/
+    public scientist : number = 0.03;
+    /**明星 SS*/
+    public star : number = 0.01;
+    /**土匪 -S */
+    public bandit : number = 0.06;
+    /**盗贼 -A */
+    public robber : number = 0.1;
+    /**变量名 */
+    public arr_People : Array<string> = ["common","scientist","star","bandit","robber"];
+    
+    /**获取区间数组 0,0.8,0.83,0.84,0.9,1*/
+    public getPercentArea():Array<number>
+    {
+       let arrPercent = [];//生产比例
+       let arr_People = this.arr_People;
+       let number = 0;
+       arrPercent.push(number);
+       for(let i = 0;i<arr_People.length;i++)
+       {
+            number += this[arr_People[i]];
+            arrPercent.push(number);
+       }
+       return arrPercent;
+    }
 }
