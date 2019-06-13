@@ -30,6 +30,8 @@ export default class People {
     public targetNode : Laya.Sprite;
     /**出生点 */
     public bornNode : Laya.Sprite;
+    /**是否被召唤 */
+    public isGo : number;
 
 
 
@@ -354,6 +356,19 @@ export default class People {
         let tY = 600;
         this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
     }
+///////////////////////////////////////////////////////////////////////////////////
+    /***
+     * 进程 / 出城逻辑 
+     * @type true进城  false出城
+    */
+   public peopleGo(type) : void
+   {
+        if(true) {
+            //进程方法
+        }else{
+            //出城方法
+        }
+   }
 
     /**人消失 */
     protected destoryPeople() : void

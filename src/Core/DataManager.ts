@@ -287,6 +287,21 @@ export default class CountryData{
         else this._innerPeople += count;
     }
     
+    /**通知人口出城 @type ： 进成ture  出城 false*/
+    public peopleGoOut(type) : void
+    {
+        let arr = this.arr_inPeople;
+        if(type) arr = this.arr_outPeople;
+        let random = Math.random();
+        let index = Math.floor(arr.length*random);
+        if(index>0)
+        {
+            if(!arr[index].isGo)
+            {
+                arr[index].peopleGo(type);
+            } 
+        }
+    }
     
 }
 
