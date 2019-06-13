@@ -18,6 +18,7 @@ export default class CountryData{
     public prestige : number = 90;
 
     /***************副数据*****************/
+
     //--------普通数据
     /**今日粮食产量 */
     public grainAdd : number = 1000;
@@ -25,6 +26,14 @@ export default class CountryData{
     public grainMinus : number =1000;
     /**粮食库存 */
     public grainStock:number=100;
+
+    //--------影响 【主数据】----------------
+    
+
+
+
+
+
 
     //--------事件数据
     /**瘟疫  0 1 2 3 4 5 0-是没发生*/
@@ -46,7 +55,16 @@ export default class CountryData{
     public bandit : number = 1;
     /**盗贼 -A */
     public robber : number = 1;
-    
+        // /**普通人 A  普通人中会产生医生 警察 等正常职业*/
+        // public common : number = 1;
+        // /**科学家 SSS*/
+        // public scientist : number = 0;
+        // /**明星 SS*/
+        // public star : number = 0;
+        // /**土匪 -S */
+        // public bandit : number = 0;
+        // /**盗贼 -A */
+        // public robber : number = 0;
     //--------城门
     /**门是否打开*/
     public isDoorOpen : boolean=true;
@@ -152,8 +170,8 @@ export default class CountryData{
 
 
     //----------------------------------------结算
-    /**五大主值结算 */
-    public cal_MainData(type:string,count:number):void
+    /**设置五大主值结算 */
+    public set_MainData(type:string,count:number):void
     {
         switch(type)
         {
@@ -173,6 +191,57 @@ export default class CountryData{
                 this.prestige+=count;
                 break;
         }
+        this.cal_MainData(type,count);
+    }
+
+    
+    public cal_MainData(type:string,count:number):void
+    {
+        switch(type){
+            case GameConfig.MAIN_MONEY:
+            ///TO DO
+        }
+        //财政 影响结算
+        this.moneyInfluence();
+        //人口 影响结算
+        this.popularSupportInfluence();
+        //幸福度 影响结算
+        this.popularSupportInfluence();
+        //科技 影响结算
+        this.technologyInfluence();
+        //威望 影响结算
+        this.prestigeInfluence();
+    }    
+
+    /**财政结算 财政影响*/
+    private moneyInfluence() : void
+    {
+        
+    }
+
+    
+    /**幸福度 影响结算*/
+    private popularSupportInfluence() : void
+    {
+        
+    }
+
+    /**人口 影响结算*/
+    private populationInfluence() : void
+    {
+        
+    }
+
+    /**科技 影响结算*/
+    private technologyInfluence() : void
+    {
+        
+    }
+
+    /**威望 影响结算*/
+    private prestigeInfluence() : void
+    {
+        
     }
 
     
