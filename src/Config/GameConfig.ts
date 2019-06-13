@@ -28,7 +28,7 @@ export default class GameConfig {
     /**检测点间距 */
     public static TEST_POINT_DIC : number = 5;
     /**速度 */
-    public static TEST_POINT_SPEED : number = 0.8;
+    public static TEST_POINT_SPEED : number = 0.4;
     /**旋转角度偏移 */
     public static TEST_POINT_RO : number = 10;
     /**人类生产间隔S */

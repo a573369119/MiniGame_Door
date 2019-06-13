@@ -58,16 +58,18 @@ export default class CountryData{
     /**进门人口 实际值/2min */
     public _innerPeople : number;
     //------------------------------------------普通人口占比
+    /**0-医生 1-警察 2-商人 -3游手好闲 -4农民*/
+    public arr_personPercentName : Array<string> = ["percentDoctor","percentPolic","percentShoper","percentNothing","percentFarmer"];
     /**普通人中 医生的占比*/
     public percentDoctor : number = 0.02;
     /**普通人种 警察占比 */
-    public percentPolic : number = 0.04;
+    public percentPolic : number = 0.03;
     /**普通人种 商人的占比 */
-    public percentShoper : number = 0.1;
+    public percentShoper : number = 0.15;
     /**游手好闲 */
     public percentNothing : number = 0.1;
     /**农民 */
-    public farmer : number = 0.7;
+    public percentFarmer : number = 0.7;
 
     //--------影响 【主数据】----------------
     
@@ -107,6 +109,9 @@ export default class CountryData{
         // public bandit : number = 0;
         // /**盗贼 -A */
         // public robber : number = 0;
+    /**已生成的人种  0 普通   1科学家  2明星 3土匪 4盗贼*/
+    public alreadyCreate : Array<number> = [0,0,0,0,0];
+
     //--------城门
     /**门是否打开*/
     public isDoorOpen : boolean=true;
@@ -115,21 +120,6 @@ export default class CountryData{
     /**特殊门 筛查 1-防止进入   2-邀请进入*/
     // public keepSelect : Array<number> = [];
 
-    
-
-    //-----------------------------------------目标点
-    /**目标点 医院 */
-    public posHospital : any = {x: 389,y:541}; 
-    /**目标点 农场 */
-    public posFarm : any = {x: 132,y:709}; 
-    /**目标点 新闻房*/
-    public posEventHouse : any = {x: 591.5,y:729}; 
-    /**皇宫 */
-    public posPalace : any = {x: 981,y:817}; 
-    /**科技 */
-    public posTechnology : any = {x: 1466,y:621}; 
-    /**军队 */
-    public posArmy : any = {x: 1874,y:707}; 
 
     //----------------------------------------区域
     /**墙内区域划分 */
@@ -176,6 +166,14 @@ export default class CountryData{
                 this.arr_RightArea.push(children[i]);
             }
         }
+        this.arr_LeftArea.push(view.parent.getChildByName("sp_wall"));
+        this.arr_RightArea.push(view.parent.getChildByName("sp_wall"));
+    }
+
+    /**生成人的随机移动速度 */
+    public getMoveSpeed() : number
+    {
+        return GameConfig.TEST_POINT_SPEED*(Math.random()+0.5);
     }
 
     /**
@@ -290,8 +288,9 @@ export default class CountryData{
     /**通知人口出城 @type ： 进成ture  出城 false*/
     public peopleGoOut(type) : void
     {
-        let arr = this.arr_inPeople;
+        let arr ;
         if(type) arr = this.arr_outPeople;
+            else arr = this.arr_inPeople;
         let random = Math.random();
         let index = Math.floor(arr.length*random);
         if(index>0)
@@ -299,10 +298,22 @@ export default class CountryData{
             if(!arr[index].isGo)
             {
                 arr[index].peopleGo(type);
+                return;
             } 
+            this.peopleGoOut(type);
+            return;
         }
+        console.log("随机出错");
+        return;
     }
     
+    /**出城门相关操作 */
+    public goOut(type) : void
+    {
+        this._outerPeople++;//实际人数加一
+        this.population--;//总人口 --
+        if(this[type]) this[type]--;
+    }
 }
 
 /**外城 */
