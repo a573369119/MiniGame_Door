@@ -26,11 +26,11 @@ export default class GameConfig {
     public static PALACE: number = 6;
     //----------------------------------检测点的间距
     /**检测点间距 */
-    public static TEST_POINT_DIC : number = 5;
+    public static TEST_POINT_DIC : number = 6;
     /**速度 */
     public static TEST_POINT_SPEED : number = 0.5;
     /**旋转角度偏移 */
-    public static TEST_POINT_RO : number = 5;
+    public static TEST_POINT_RO : number = 20;
     /**人类生产间隔 */
     public static PERSON_CREATE_TIME : number = 2;
 

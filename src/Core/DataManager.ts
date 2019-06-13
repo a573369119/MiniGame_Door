@@ -9,7 +9,7 @@ export default class CountryData{
     /**国家财政 */
     public money : number = 10000;
     /**国家人口 */
-    public population : number=1;
+    public population : number=100;
     /**国家幸福度 */
     public popularSupport : number = 50;
     /**国家科技 */
@@ -37,15 +37,15 @@ export default class CountryData{
     //--------职业人数
     public arr_People : Array<string> = ["common","scientist","star","bandit","robber"];
     /**普通人 A  普通人中会产生医生 警察 等正常职业*/
-    public common : number = 1;
+    public common : number = 95;
     /**科学家 SSS*/
-    public scientist : number = 0;
+    public scientist : number = 1;
     /**明星 SS*/
-    public star : number = 0;
+    public star : number = 2;
     /**土匪 -S */
-    public bandit : number = 0;
+    public bandit : number = 1;
     /**盗贼 -A */
-    public robber : number = 0;
+    public robber : number = 1;
     
     //--------城门
     /**门是否打开*/

@@ -223,7 +223,7 @@ export default class People {
     /**towerd转化成位移 */
     protected towedToMove() : void
     {
-        this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,1000,412.5);;
+        this.toward.rotation = Tool.rotateRopePoint_2(this.sp.x,this.sp.y,1000,600);;
         this.peopleTowerd();//让目标朝向计算数
     }
 
@@ -264,15 +264,14 @@ export default class People {
     /**速度控制 */
     private speedCtr(power) : void
     {
-        if(power == 0 || power == 1) this.toward.speed = 0.2;
-            else this.toward.speed = GameConfig.TEST_POINT_SPEED*0.035*power*power; 
+        this.toward.speed = GameConfig.TEST_POINT_SPEED*((power+1)/(this.towardPos.length+3)); 
         console.log("speed ::" + this.toward.speed);
     }
 
     /**判断方向 */
     protected judgeLeftRight(power) : void
     {
-        this.toward.rotationChange += 5;
+        this.toward.rotationChange += GameConfig.TEST_POINT_RO;
         let ro1 = this.toward.rotation - this.toward.rotationChange;
         let ro2 = this.toward.rotation + this.toward.rotationChange;
         this.getTowerdPos(ro1);
@@ -351,7 +350,7 @@ export default class People {
         // let tX = this.targetNode.x;
         // let tY = this.targetNode.y;
         let tX = 1000;
-        let tY = 412.5;
+        let tY = 600;
         this.toward.targetRotation = Tool.rotateRopePoint_2(pX,pY,tX,tY);
     }
 
