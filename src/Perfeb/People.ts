@@ -396,10 +396,13 @@ export default class People {
    protected peopleInto() : void
    {
         let bornNode = this.view.getChildByName("sp_door") as Laya.Sprite;
+        this.setPos(bornNode.x,bornNode.y,bornNode);
+        this.isOut = false;
         let houseNode = this.view.getChildByName("house");
         let targetNode : Laya.Sprite = this.getTargePos(houseNode);
         this.setPos(bornNode.x,bornNode.y + 40,bornNode);
         this.setTraget(targetNode);
+        this.openBehaviour();
    }
 
    /**从house中获取 一个随机的点 */

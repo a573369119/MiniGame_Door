@@ -194,7 +194,7 @@ export default class PeopleManager {
     }
 
     /**生产位置 */
-    private createPos(people) : void
+    protected createPos(people) : void
     {
         let houseNode = (this.view as Laya.Sprite).getChildByName('house');
         let percent = houseNode._children.length/100;

@@ -121,7 +121,7 @@ export default class GameWorld extends ui.GameWorldUI{
     /**关门 */
     private doorClose() : void
     {
-
+        
     }
 
     /**开门 */
