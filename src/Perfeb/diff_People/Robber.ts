@@ -1,10 +1,7 @@
 import People from "../People";
+import CountryData from "../../Core/DataManager";
 
 export default class Robber extends People{
-    /**财政伤害 */
-    public money:number;
-    /**幸福度 */
-    public popularSupport:number;
     constructor(view,type:string,isOut){
         super(view,type,isOut);
     }
@@ -12,20 +9,33 @@ export default class Robber extends People{
     /**偷取财政的方式,先给予时间 */
     public cutMoneyTime():void
     {
-        //给予随机时间进行偷盗(10-20)秒
-        let time=Math.random()*10+10;
+        //给予随机时间进行偷盗(3-6)分钟
+        let time=Math.random()*3+3;
         //time秒之后进行偷盗
-        Laya.timer.frameOnce(time*60,this,this.CutMoney);
+        Laya.timer.frameOnce(time*60*60,this,this.CutMoney);
     }
 
     //时间后偷取
-    public CutMoney():void
+    private CutMoney():void
     {
-        this.money=Math.floor(Math.random()*10);
+        let random=Math.random();
+        if(random<0.5)
+        {
+            //偷盗成功
+            CountryData.ins_.money-=Math.floor(Math.random()*10);
+            this.lowSupport();
+        }
+        //给予随机时间进行偷盗(3-6)分钟
+        let time=Math.random()*3+3;
+        //time秒之后进行偷盗
+        Laya.timer.frameOnce(time*60*60,this,this.CutMoney);
     }
 
-    /**降低 */
-
+    /**降低幸福度 */
+    private lowSupport():void
+    {
+        CountryData.ins_.popularSupport-=0.05;
+    }
     /**墙内 */
    /**墙内逻辑 */
    protected people_PosInner() : void

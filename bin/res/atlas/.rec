@@ -34,6 +34,8 @@ P 7E990267 vscroll.png
 P E466EB1C vslider$bar.png
 P 2BFF7046 vslider.png
 D map
+P 350FBD88 army.png
+R E230AF62 background.jpg
 P 76BDC0A9 bandit.png
 P 02A13742 bg.png
 P 8935BF21 bg1.png
@@ -45,11 +47,25 @@ R C9A90B61 bg6.png
 R 01DF0BC4 bg7.png
 P 341051D0 bridge.png
 P D0F870F3 common.png
+P 4A3683DA door1.png
+P 77439972 door2.png
+P 71542E28 door3.png
+P B731E66B door4.png
+P C22B59F9 door5.png
+P 083BEF0C doorHouse.png
+P 146C4428 evetHouse.png
+P 55340580 farm.png
 R 6F2EAEED ground.png
-P F9E20EED house.png
+P 3FAE5058 hospital.png
+P 54DFB426 house.png
+R 3D82C95F palace.png
 P 5F383D74 robber.png
 P A7C28B09 scientist.png
 P BEAA4BE0 star.png
+P 0ECD31C3 tech.png
+P 48D602D1 tree1.png
+P 763A1F5D tree2.png
+P 3EF77DF1 tree3.png
 R 051A052D wall.png
 R D291430F water.png
 D unpackage

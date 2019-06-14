@@ -121,12 +121,13 @@ export default class GameWorld extends ui.GameWorldUI{
     /**关门 */
     private doorClose() : void
     {
-
+        this.ani1.play(0,false);
     }
 
     /**开门 */
     private doorOpen() : void
     {
+        this.ani2.play(0,false);
 
     }
 
@@ -167,92 +168,17 @@ export default class GameWorld extends ui.GameWorldUI{
         this.msgDialog.showMsg(type);
     }
 
-    /**点击购买按钮 */
-    /*private buyDialog_Click(type:string):void
+    /**更新UI栏五大主值信息 */
+    private updateUIMainData():void
     {
-        switch(type)
-        {
-            case GameConfig.MAIN_POPULATION:
-                this.buyDialog.buy_name.text="人口";
-                break;
-            case GameConfig.MAIN_POPULARSUPPORT:
-                this.buyDialog.buy_name.text="幸福度";
-                break;
-            case GameConfig.MAIN_MONEY:
-                this.buyDialog.buy_name.text="财政";
-                break;
-            case GameConfig.MAIN_TECHNOLOGY:
-                this.buyDialog.buy_name.text="科技";
-                break;
-            case GameConfig.MAIN_PRESTIGE:
-                this.buyDialog.buy_name.text="威望";
-                break;
-        }
-        this.buyDialog.popup();
-    }*/
-
-    //---------------------------粮食-------------
-    /**粮食产出公式 */
-    public cal_GrainAdd():void
-    {
-
+        this.text_count_population.text=CountryData.ins_.population.toString();
+        this.text_count_popularSupport.text=CountryData.ins_.popularSupport.toString();
+        this.text_count_money.text=CountryData.ins_.money.toString();
+        this.text_count_technology.text=CountryData.ins_.technology.toString();
+        this.text_count_prestige.text=CountryData.ins_.prestige.toString();
     }
+    
 
-    /**粮食消耗公式 */
-    public cal_GrainMinus():void
-    {
-        
-    }
-
-    /**粮食结算 */
-    /*public cal_Grain():void
-    {
-        //如果还有粮食库存
-        if(CountryData.ins_.grainAdd>=CountryData.ins_.grainMinus)
-        {
-            //如果生产量大于大于消耗率的某个倍率，先让其自动转化为财政，之后修改为手动转化
-            if(CountryData.ins_.grainAdd/CountryData.ins_.grainMinus>=GameConfig.GRAIN_EXCHANGEMONEY_PERCENT)
-            {
-                //超出倍率的部分
-                let exchange=CountryData.ins_.grainAdd-CountryData.ins_.grainMinus*GameConfig.GRAIN_EXCHANGEMONEY_PERCENT;
-                //换钱
-                this.exchangeMoney(exchange);
-                //剩余的加入库存
-                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-exchange-CountryData.ins_.grainMinus);
-            }
-            else
-            {
-                //加入库存
-                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-CountryData.ins_.grainMinus);
-            }
-        }
-        else
-        {
-            //如果库存加上生产的粮食不足以抵够消耗的粮食
-            if((CountryData.ins_.grainStock+CountryData.ins_.grainAdd)<CountryData.ins_.grainMinus)
-            {
-                //点击选择是否购买粮食，如果不购买则导致人口减少和幸福度降低
-                
-            }
-            else
-            {
-                //减少库存
-                CountryData.ins_.grainStock-=CountryData.ins_.grainMinus-CountryData.ins_.grainAdd;
-            }
-        }
-    }*/
-
-    /**粮食换钱 */
-    public exchangeMoney(grain:number):void
-    {
-
-    }
-
-    /**钱换粮食 */
-    public exchangeGrain(money:number):void
-    {
-
-    }
 
     //----------------------稀有门
     /**购买稀有门 */
@@ -264,11 +190,19 @@ export default class GameWorld extends ui.GameWorldUI{
     /**游戏流程开始 */
     private gameStart() : void
     {
+        this.updateUIMainData();
         this.peopleManager.createPeople();//人口生成逻辑运行
         this.peopleManager.createPeople_Inner();//内人口生成
     }
 
 
+    /**开启定时器 */
+    private openTimer():void
+    {
+        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.cal_Money);
+        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.influence_Grain);
+        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.influence_PopularSupport);
+    }
     //////////////////////////////////////////////人口流动通知器
     /**
      * 流动比例， 通知器

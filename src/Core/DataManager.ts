@@ -14,9 +14,9 @@ export default class CountryData{
     /**国家幸福度 */
     public popularSupport : number = 50;
     /**国家科技 */
-    public technology : number = 10;
+    public technology : number = 50;
     /**国家声望 */
-    public prestige : number = 90;
+    public prestige : number = 50;
 
     /***************副数据*****************/
     //--------主数据影响
@@ -29,16 +29,17 @@ export default class CountryData{
     public technologyCost : number = 100;
     /**税收率 */
     public tax : number = 0.05;
-
-    //变动率
     /**粮食消耗量 (人均消耗量) */
     public grainPerCost : number = 1;
-    /**粮食产率 (人均产率)*/
-    public grainPerAdd : number = 0.8;
+    
+
+    //变动率
+    /**粮食产量 (人均产量)*/
+    public grainPerAdd : number = 1;
     /**粮食库存 */
     public grainStock:number=0;
     /**军费减少率 */
-    public armyPercent:number=0.1;
+    public armyPercent:number=0.2;
     /**GDP 挣钱能力，每人每天能产多少钱 */
     public GDP : number = 10;
 
@@ -197,79 +198,30 @@ export default class CountryData{
 
 
     //----------------------------------------结算
-    /**设置五大主值结算 */
-    public set_MainData(type:string,count:number):void
+    /**财政结算*/
+    public cal_Money() : void
     {
-        switch(type)
-        {
-            case "money":
-                this.money+=count;
-                break;
-            case "population":
-                this.population+=count;
-                break;
-            case "popularSupport":
-                this.popularSupport+=count;
-                break;
-            case "technology":
-                this.technology+=count;
-                break;
-            case "prestige":
-                this.prestige+=count;
-                break;
-        }
-        this.cal_MainData(type,count);
+        this.prestige_ArmyCost();
+        this.steadyCost();
+        this.getTax();
+        this.technology_GDP();
     }
 
-    
-    public cal_MainData(type:string,count:number):void
+    /**粮食 影响结算*/
+    public influence_Grain() : void
     {
-        switch(type){
-            case GameConfig.MAIN_MONEY:
-            ///TO DO
-        }
-        //财政 影响结算
-        this.moneyInfluence();
-        //人口 影响结算
-        this.popularSupportInfluence();
-        //幸福度 影响结算
-        this.popularSupportInfluence();
-        //科技 影响结算
-        this.technologyInfluence();
-        //威望 影响结算
-        this.prestigeInfluence();
-    }    
-
-    /**财政结算 财政影响*/
-    private moneyInfluence() : void
-    {
-        
+        let grainCost=this.population_GrainCost();
+        let grainAdd=this.population_GrainAdd();
     }
 
-    
-    /**幸福度 影响结算*/
-    private popularSupportInfluence() : void
+    /**幸福度 影响结算 */
+    public influence_PopularSupport() : void
     {
-        
+        this.support_Percent();
+        this.support_PeopleType();
+        this.support_OutPeopleMax();
     }
 
-    /**人口 影响结算*/
-    private populationInfluence() : void
-    {
-        
-    }
-
-    /**科技 影响结算*/
-    private technologyInfluence() : void
-    {
-        
-    }
-
-    /**威望 影响结算*/
-    private prestigeInfluence() : void
-    {
-        
-    }
 
     //-------------------------------公式
     /**稳定支出 */
@@ -278,18 +230,114 @@ export default class CountryData{
         this.money-=this.armyCost*(1-this.armyPercent)+this.governCost+this.technologyCost;
     }
 
-    /**粮食消耗 */
-    private grainCost():number
+    /**粮食消耗 人口数*每人消耗量*/
+    private population_GrainCost():number
     {
         return this.population*this.grainPerCost;
     }
 
-    /**粮食生产 */
+    /**粮食生产 人口数*每人实际产量*/
     private population_GrainAdd():number
     {
-        return this.population;
+        //科技度转换 科技度0-100 生产变化率0-2 公式暂定y=x*0.02-1,50为分界限
+        let change=this.technology*0.02-1;
+        this.grainPerAdd=(1+change)*this.grainPerAdd;
+        let pro=this.grainPerAdd*this.population;
+        return pro;
     }
 
+    /**幸福度影响人口流动率 */
+    private support_Percent():void
+    {
+        //幸福影响人口流动率的波动范围 -0.2~0.2 公式暂定y=x*0.004-0.2,50为分界限
+        let change=this.popularSupport*0.004-0.2;
+        this.percent=(1+change)*this.percent;   
+    }
+
+    /**幸福度影响人种几率 均从普通人几率中进行替换*/
+    private support_PeopleType()
+    {
+        //科学家波动范围 0.01-0.05 公式暂定y=x*0.0004+0.01,50为分界限
+        OutCountryData.ins_.scientist=this.popularSupport*0.0004+0.01;
+        //明星波动范围 0.005-0.025 公式暂定y=x*0.0002+0.005,50为分界限
+        OutCountryData.ins_.star=this.popularSupport*0.0002+0.005;
+        //盗贼波动范围 0.06-0.14 公式暂定y=x*0.0008+0.06,50为分界限
+        OutCountryData.ins_.robber=this.popularSupport*0.0008+0.06;
+        //土匪波动范围 0.02-0.1 公式暂定y=x*0.0008+0.02,50为分界限
+        OutCountryData.ins_.bandit=this.popularSupport*0.0008+0.02;
+        //普通人波动范围
+        OutCountryData.ins_.common=1-(OutCountryData.ins_.scientist+OutCountryData.ins_.star+OutCountryData.ins_.robber+OutCountryData.ins_.bandit);
+    }
+
+    /**幸福度影响墙外人口 墙外最大容纳数200-600*/
+    private support_OutPeopleMax():void
+    {
+        //墙外增长率波动范围 0.2-0.6 公式暂定y=x*0.004+0.2,50为分界限
+        let change=this.popularSupport*0.004+0.2;
+        OutCountryData.ins_.maxCount=1000*change;
+    }
+
+    /**科技影响GDP */
+    private technology_GDP():void
+    {
+        //GDP波动范围 -0.5~0.5 公式暂定y=x*0.05,50为分界限
+        let change=this.technology*0.01-0.5;
+        //实际GDP
+        let currGDP=this.GDP*(change+1);
+        this.money-=currGDP*this.population;
+    }
+    /**威望影响军费 */
+    private prestige_ArmyCost():void
+    {
+        //军费减少率波动范围 0.0-0.4 公式暂定y=x*0.004,50为分界限
+        this.armyPercent=this.prestige*0.004;
+    }
+
+    /**税收 */
+    public getTax():void
+    {
+        this.money+=this.tax;
+    }
+
+    /**粮食结算 */
+    /*public cal_Grain():void
+    {
+        //如果还有粮食库存
+        if(CountryData.ins_.grainAdd>=CountryData.ins_.grainMinus)
+        {
+            //如果生产量大于大于消耗率的某个倍率，先让其自动转化为财政，之后修改为手动转化
+            if(CountryData.ins_.grainAdd/CountryData.ins_.grainMinus>=GameConfig.GRAIN_EXCHANGEMONEY_PERCENT)
+            {
+                //超出倍率的部分
+                let exchange=CountryData.ins_.grainAdd-CountryData.ins_.grainMinus*GameConfig.GRAIN_EXCHANGEMONEY_PERCENT;
+                //换钱
+                this.exchangeMoney(exchange);
+                //剩余的加入库存
+                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-exchange-CountryData.ins_.grainMinus);
+            }
+            else
+            {
+                //加入库存
+                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-CountryData.ins_.grainMinus);
+            }
+        }
+        else
+        {
+            //如果库存加上生产的粮食不足以抵够消耗的粮食
+            if((CountryData.ins_.grainStock+CountryData.ins_.grainAdd)<CountryData.ins_.grainMinus)
+            {
+                //点击选择是否购买粮食，如果不购买则导致人口减少和幸福度降低
+                
+            }
+            else
+            {
+                //减少库存
+                CountryData.ins_.grainStock-=CountryData.ins_.grainMinus-CountryData.ins_.grainAdd;
+            }
+        }
+    }*/
+
+    
     /**改变 进、出 目标人数 @isout:是否是出城  @count：改变目标值*/
     public setInOutTarget(isOut,count) : void
     {
@@ -340,18 +388,18 @@ export class OutCountryData{
     public static ins_ : OutCountryData = new OutCountryData();
     /**************主数据********************/
     /**最大外城容纳数量 */
-    public maxCount : number=50;
+    public maxCount : number=400;
     /**当前外城人口数 */
     public outCount:number=0;
     /**人滞留时间 */
     public limitTime:number=50;
     //------------------------------------------
     /**普通人*/
-    public common : number = 0.8;
+    public common : number = 0.795;
     /**科学家 SSS*/
     public scientist : number = 0.03;
     /**明星 SS*/
-    public star : number = 0.01;
+    public star : number = 0.015;
     /**土匪 -S */
     public bandit : number = 0.06;
     /**盗贼 -A */
@@ -359,7 +407,7 @@ export class OutCountryData{
     /**变量名 */
     public arr_People : Array<string> = ["common","scientist","star","bandit","robber"];
     
-    /**获取区间数组 0,0.8,0.83,0.84,0.9,1*/
+    /**获取区间数组 0,0.795,0.825,0.84,0.9,1*/
     public getPercentArea():Array<number>
     {
        let arrPercent = [];//生产比例
