@@ -145,6 +145,44 @@ export default class CountryData{
         this._outerPeople = 0;
     }
 
+    /**加入数组 isOut是否在外面*/
+    public addArray(isOut,obj) : void
+    {
+        let arr = this.arr_inPeople;
+        if(isOut) arr = this.arr_outPeople;
+        for(let i=0; i< arr.length;i++)
+        {
+            if(arr[i] === undefined) 
+            {
+                arr[i] = obj;
+                return;
+            }
+        }
+        arr.push(obj);
+    }
+
+    /**移除数组 isOut是否在外面 */
+    public deleteArray(isOut,obj) : void
+    {
+        let arr = this.arr_inPeople;
+        if(isOut) arr = this.arr_outPeople;
+        for(let i=0;i < arr.length ;i++)
+        {
+            if(arr[i] === obj)
+            {
+                arr[i] === undefined;
+                return;
+            }
+        }
+    }
+
+    /**数组转移 城外-》城内 或城内到城外  是否是[城外转城内]  转移对象*/
+    public moveArray(isOut,obj) : void
+    {
+        this.addArray(!isOut,obj);//加入城内数组
+        this.deleteArray(isOut,obj);//移除城外数组
+    }
+
     onEnable(){
         
     }

@@ -206,6 +206,7 @@ export default class PeopleManager {
                 break;
         }
         if(!people) {console.log("新建人失败！") ;return;}
+        Laya.timer.clearAll(people);
         people.isOut = false;
         CountryData.ins_.arr_inPeople.push(people);//加入维护数组
         if(people === undefined || people === null) {console.log("没有生成人种！种类:" + randomString);return;}
