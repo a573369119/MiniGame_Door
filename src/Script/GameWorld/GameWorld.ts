@@ -264,7 +264,7 @@ export default class GameWorld extends ui.GameWorldUI{
     /**游戏流程开始 */
     private gameStart() : void
     {
-        this.peopleManager.createPeople();//人口生成逻辑运行
+        this.peopleManager.openPeopleFactory();//人口生成逻辑运行
         this.peopleManager.createPeople_Inner();//内人口生成
     }
 

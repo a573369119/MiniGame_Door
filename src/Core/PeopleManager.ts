@@ -18,6 +18,11 @@ export default class PeopleManager {
     private countTime : number = 0;
     /**生产时间间隔 */
     private countTime_ : number = 500;
+    //外城人口计时器
+    private countTime_out : number = 0;    
+    /**外城人口生产间隔 */
+    private countTime_out_ : number = 500;
+    //---------------------------------------
     //---------------------------------------
     constructor(view)
     {
@@ -33,12 +38,20 @@ export default class PeopleManager {
     /**开启生成工厂 */
     public openPeopleFactory() : void
     {
-        this.createPeople();
+        Laya.timer.loop(1,this,this.createPeople);
     }
 
     /**生成人 */
     public createPeople():void
     {
+        if(this.countTime_out <= this.countTime_out_)
+        {
+            this.countTime_out++;
+            return;
+        }
+        this.countTime_out = 0;
+        this.countTime_out_ = Math.random()*GameConfig.PERSON_CREATE_TIME*100;
+        if(OutCountryData.ins_.outCount >= OutCountryData.ins_.maxCount-1) return;
         let people;
         /**生成不同人种的几率 */
         let random=Math.floor(Math.random()*100);
@@ -49,6 +62,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Common(this.view,GameConfig.COMMON_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //小偷
@@ -58,6 +72,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.ROBBER_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //土匪
@@ -67,6 +82,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.BANDIT_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //科学家
@@ -76,6 +92,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.SCIENTIST_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         //明星
@@ -85,6 +102,7 @@ export default class PeopleManager {
             if(!people)
             {
                 people =new Robber(this.view,GameConfig.STAR_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
             }
         }
         people.visible=true;
@@ -92,11 +110,6 @@ export default class PeopleManager {
         this.getPos();
         people.setPos(this.X,this.Y);
         people.openBehaviour();
-        let time=Math.random()*3;
-        if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
-        {
-            Laya.timer.frameOnce(time*60,this,this.createPeople);
-        }
         OutCountryData.ins_.outCount++;
     }
 
@@ -160,6 +173,7 @@ export default class PeopleManager {
         let people = Laya.Pool.getItem(randomString);  
         let countryData = CountryData.ins_;
         //生产人种
+        console.log(randomString);
         switch(randomString)
         {    /**已生成的人种  0 普通   1科学家  2明星 3土匪 4盗贼*/
             case GameConfig.COMMON_MAN:   
@@ -238,7 +252,7 @@ export default class PeopleManager {
             }
         }
         if(!person) {console.log("人种随机失败！");return;}
-        // console.log(person);
+        console.log("---------" + person);
         //判断人是否还能生成
         if(index === undefined){console.log("概率计算出错");return;}
         if(CountryData.ins_.alreadyCreate[index] == CountryData.ins_[person])
@@ -246,7 +260,9 @@ export default class PeopleManager {
             if(this.getAlreadCreate() == CountryData.ins_.population) return;
             person = this.getRandom(arrPercent);     
         }
-       this.create_Inner(person);//生产人种   
+        if(!person){console.log("人种随机失败！");return;}
+       this.create_Inner(person);//生产人种 
+       return person;  
     }
 
     /*获取已生成人口的数量*/

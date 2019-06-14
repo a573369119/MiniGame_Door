@@ -32,9 +32,9 @@ export default class CountryData{
 
     //变动率
     /**粮食消耗量 (人均消耗量) */
-    public grainCost : number = 1;
-    /**粮食产量 (人均产量)*/
-    public grainAdd : number = 1;
+    public grainPerCost : number = 1;
+    /**粮食产率 (人均产率)*/
+    public grainPerAdd : number = 0.8;
     /**粮食库存 */
     public grainStock:number=0;
     /**军费减少率 */
@@ -269,6 +269,25 @@ export default class CountryData{
     private prestigeInfluence() : void
     {
         
+    }
+
+    //-------------------------------公式
+    /**稳定支出 */
+    private steadyCost():void
+    {
+        this.money-=this.armyCost*(1-this.armyPercent)+this.governCost+this.technologyCost;
+    }
+
+    /**粮食消耗 */
+    private grainCost():number
+    {
+        return this.population*this.grainPerCost;
+    }
+
+    /**粮食生产 */
+    private population_GrainAdd():number
+    {
+        return this.population;
     }
 
     /**改变 进、出 目标人数 @isout:是否是出城  @count：改变目标值*/
