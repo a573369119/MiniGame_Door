@@ -17,11 +17,10 @@ export module ui {
         }
     }
     export class GameWorldUI extends Scene {
+		public ani1:Laya.FrameAnimation;
+		public ani2:Laya.FrameAnimation;
 		public sp_scene:Laya.Sprite;
 		public sp_ground:Laya.Sprite;
-		public sp_river:Laya.Sprite;
-		public sp_wall:Laya.Sprite;
-		public sp_door:Laya.Sprite;
 		public house:Laya.Sprite;
 		public house_1:Laya.Sprite;
 		public house_2:Laya.Sprite;
@@ -63,6 +62,10 @@ export module ui {
 		public house_36:Laya.Sprite;
 		public house_37:Laya.Sprite;
 		public army:Laya.Sprite;
+		public sp_river:Laya.Sprite;
+		public sp_wall:Laya.Sprite;
+		public sp_door:Laya.Sprite;
+		public clickHouse:Laya.Sprite;
 		public sp_UI:Laya.Sprite;
 		public img_population:Laya.Sprite;
 		public text_count_population:laya.display.Text;

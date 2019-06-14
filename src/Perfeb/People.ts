@@ -213,13 +213,19 @@ export default class People {
                 //城外人口-1
                 OutCountryData.ins_.outCount--;
                 //国家人口+1
-                CountryData.ins_.cal_MainData(GameConfig.MAIN_POPULATION,1);
+                CountryData.ins_.population++;
                 // if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
                 // {
                 //     let time=Math.random()*3;
                 //     Laya.timer.frameOnce(time*60,this,createPeople);
                 // }
                 this.peopleInto();
+                // CountryData.ins_.cal_MainData(GameConfig.MAIN_POPULATION,1);
+                // if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
+                // {
+                //     let time=Math.random()*3;
+                //     Laya.timer.frameOnce(time*60,this,this.createPeople);
+                // }
             }
             
         }

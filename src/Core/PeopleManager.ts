@@ -3,6 +3,9 @@ import GameConfig from "../Config/GameConfig";
 import CountryData, { OutCountryData } from "./DataManager";
 import Common from"../Perfeb/diff_People/Common"
 import Robber from"../Perfeb/diff_People/Robber"
+import Scientist from "../Perfeb/diff_People/Scientist";
+import Star from "../Perfeb/diff_People/Star";
+import Bandit from "../Perfeb/diff_People/Bandit";
 /**
  * 人 管理
  */
@@ -52,11 +55,12 @@ export default class PeopleManager {
         this.countTime_out = 0;
         this.countTime_out_ = Math.random()*GameConfig.PERSON_CREATE_TIME*100;
         if(OutCountryData.ins_.outCount >= OutCountryData.ins_.maxCount-1) return;
+        let array:Array<number>=OutCountryData.ins_.getPercentArea();
         let people;
         /**生成不同人种的几率 */
-        let random=Math.floor(Math.random()*100);
+        let random=Math.random();
         //普通人
-        if(random>=0&&random<80)
+        if(random>=0&&random<array[1])
         {
             people =Laya.Pool.getItem("common");
             if(!people)
@@ -65,8 +69,30 @@ export default class PeopleManager {
                 CountryData.ins_.arr_outPeople.push(people);
             }
         }
-        //小偷
-        else if(random>=80&&random<90)
+        //科学家
+        else if(random>=array[1]&&random<array[2])
+        {
+            people =Laya.Pool.getItem("scientist");
+            if(!people)
+            {
+                people = new Scientist(this.view,GameConfig.SCIENTIST_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
+            }
+            // people.createTechnologyTime();
+        }
+        //明星
+        else if(random>=array[2]&&random<array[3])
+        {
+            people =Laya.Pool.getItem("star");
+            if(!people)
+            {
+                people =new Star(this.view,GameConfig.STAR_MAN,true);
+                CountryData.ins_.arr_outPeople.push(people);
+            }
+            // people.createStarTime();
+        }
+        //盗贼
+        else if(random>=array[3]&&random<array[4])
         {
             people =Laya.Pool.getItem("robber");
             if(!people)
@@ -74,36 +100,18 @@ export default class PeopleManager {
                 people =new Robber(this.view,GameConfig.ROBBER_MAN,true);
                 CountryData.ins_.arr_outPeople.push(people);
             }
+            // people.cutMoneyTime();
         }
         //土匪
-        else if(random>=90&&random<96)
+        else
         {
             people =Laya.Pool.getItem("bandit");
             if(!people)
             {
-                people =new Robber(this.view,GameConfig.BANDIT_MAN,true);
+                people =new Bandit(this.view,GameConfig.BANDIT_MAN,true);
                 CountryData.ins_.arr_outPeople.push(people);
             }
-        }
-        //科学家
-        else if(random>=96&&random<99)
-        {
-            people =Laya.Pool.getItem("scientist");
-            if(!people)
-            {
-                people =new Robber(this.view,GameConfig.SCIENTIST_MAN,true);
-                CountryData.ins_.arr_outPeople.push(people);
-            }
-        }
-        //明星
-        else
-        {
-            people =Laya.Pool.getItem("star");
-            if(!people)
-            {
-                people =new Robber(this.view,GameConfig.STAR_MAN,true);
-                CountryData.ins_.arr_outPeople.push(people);
-            }
+            // people.cutMoneyTime();
         }
         people.visible=true;
         people.isOut = true;

@@ -1,7 +1,7 @@
 export default class GameConfig {
     /**人种 - 普通人 */
     public static COMMON_MAN : string = "common";
-    /**人种 - 小偷 */
+    /**人种 - 盗贼 */
     public static ROBBER_MAN : string = "robber";
     /**人种 - 土匪 */
     public static BANDIT_MAN : string = "bandit";
@@ -49,7 +49,12 @@ export default class GameConfig {
     /**国家威望 */
     public static MAIN_PRESTIGE : string = "prestige";
 
+    
 
+    //----------------------------------时间
+    /**五大主值触发时间 */
+    public static TIME_MAINDATA : number = 12*60*60;
+    
     //----------------------------------其他
     /**一天时间/分钟 */
     public static ONE_DAY:number=10*60;
