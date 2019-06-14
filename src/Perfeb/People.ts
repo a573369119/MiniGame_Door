@@ -105,6 +105,8 @@ export default class People {
             this.sp = new Laya.Sprite();
             this.view.addChild(this.sp);
         }
+        //测试
+        this.sp.zOrder = 11;
         this.sp.loadImage(imgUrl);
         this.sp.size(12,12);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);        
@@ -189,11 +191,11 @@ export default class People {
         {
             this.destoryPeople();
             OutCountryData.ins_.outCount--;
-            if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
-            {
-                let time=Math.random()*3;
-                Laya.timer.frameOnce(time*60,this,this.createPeople);
-            }
+            // if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
+            // {
+            //     let time=Math.random()*3;
+            //     Laya.timer.frameOnce(time*60,this,this.createPeople);
+            // }
         }
 
         //护城河检测
@@ -214,17 +216,20 @@ export default class People {
                 OutCountryData.ins_.outCount--;
                 //国家人口+1
                 CountryData.ins_.population++;
+                //
+                CountryData.ins_._innerPeople++;
                 // if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
                 // {
                 //     let time=Math.random()*3;
                 //     Laya.timer.frameOnce(time*60,this,createPeople);
                 // }
+                CountryData.ins_.moveArray(true,this);
                 this.peopleInto();
                 // CountryData.ins_.cal_MainData(GameConfig.MAIN_POPULATION,1);
                 // if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
                 // {
                 //     let time=Math.random()*3;
-                //     Laya.timer.frameOnce(time*60,this,this.createPeople);
+                //     Laya.timer.frameOnce(time*60,this,this.create    People);
                 // }
             }
             
@@ -262,10 +267,11 @@ export default class People {
         this.sp.y += this.toward.speed*Tool.rotationSet(this.toward.rotation,"cos");
         this.sp.rotation = this.toward.rotation;
         if(Tool.blockTest(this.targetNode,this.sp)) {
-            if(this.targetNode.name === "sp_door")
+            if(this.targetNode.name == "sp_door")
             {
                 CountryData.ins_.goOut(this.type);
-                this.destoryPeople(true);            
+                this.destoryPeople(true);         
+                CountryData.ins_.moveArray(false,this);                   
                 this.doorPeople_ToOut();            
             }
             else
@@ -520,5 +526,15 @@ export default class People {
         }
         // console.log(CountryData.ins_.alreadyCreate);
         
+    }
+
+    public clearTimer() : void
+    {
+        Laya.timer.clear(this,this.checkLimit_Out);
+        Laya.timer.clear(this,this.limitTime);
+        Laya.timer.clear(this,this.people_PosInner);
+        Laya.timer.clear(this,this.closeMoveTimer);
+        Laya.timer.clear(this,this.moveDistance);
+        Laya.timer.clear(this,this.people_PosOut);
     }
 }

@@ -138,7 +138,7 @@ export default class Tool{
      * */
     public static blockTest(sp,point) : boolean
     {
-        if(!sp || !point) return false;
+        if(!sp) return false;
         let pointLeft : any ={x:sp.x - sp.width/2,y:sp.y-sp.height/2};
         let pointRight : any ={x:sp.x + sp.width/2,y:sp.y+sp.height/2};
         let s_pointLeft = point.x > pointLeft.x && point.y>pointLeft.y;
