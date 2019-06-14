@@ -141,11 +141,22 @@ export default class CountryData{
         this.arr_RightArea = new Array<any>();
         this.arr_inPeople = new Array<People>();
         this.arr_outPeople = new Array<People>();
+        this._innerPeople = 0;
+        this._outerPeople = 0;
     }
 
     onEnable(){
         
     }
+
+    /**开启定时器 */
+    public openTimer():void
+    {
+        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,this.cal_Money);
+        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,this.influence_Grain);
+        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,this.influence_PopularSupport);
+    }
+
 
     /**获取区域 */
     public setArea(view : Laya.Node) : void
@@ -226,19 +237,19 @@ export default class CountryData{
 
     //-------------------------------公式
     /**稳定支出 */
-    private steadyCost():void
+    public steadyCost():void
     {
         this.money-=this.armyCost*(1-this.armyPercent)+this.governCost+this.technologyCost;
     }
 
     /**粮食消耗 人口数*每人消耗量*/
-    private population_GrainCost():number
+    public population_GrainCost():number
     {
         return this.population*this.grainPerCost;
     }
 
     /**粮食生产 人口数*每人实际产量*/
-    private population_GrainAdd():number
+    public population_GrainAdd():number
     {
         //科技度转换 科技度0-100 生产变化率0-2 公式暂定y=x*0.02-1,50为分界限
         let change=this.technology*0.02-1;
@@ -248,7 +259,7 @@ export default class CountryData{
     }
 
     /**幸福度影响人口流动率 */
-    private support_Percent():void
+    public support_Percent():void
     {
         //幸福影响人口流动率的波动范围 -0.2~0.2 公式暂定y=x*0.004-0.2,50为分界限
         let change=this.popularSupport*0.004-0.2;
@@ -256,7 +267,7 @@ export default class CountryData{
     }
 
     /**幸福度影响人种几率 均从普通人几率中进行替换*/
-    private support_PeopleType()
+    public support_PeopleType()
     {
         //科学家波动范围 0.01-0.05 公式暂定y=x*0.0004+0.01,50为分界限
         OutCountryData.ins_.scientist=this.popularSupport*0.0004+0.01;
@@ -271,7 +282,7 @@ export default class CountryData{
     }
 
     /**幸福度影响墙外人口 墙外最大容纳数200-600*/
-    private support_OutPeopleMax():void
+    public support_OutPeopleMax():void
     {
         //墙外增长率波动范围 0.2-0.6 公式暂定y=x*0.004+0.2,50为分界限
         let change=this.popularSupport*0.004+0.2;
@@ -279,7 +290,7 @@ export default class CountryData{
     }
 
     /**科技影响GDP */
-    private technology_GDP():void
+    public technology_GDP():void
     {
         //GDP波动范围 -0.5~0.5 公式暂定y=x*0.05,50为分界限
         let change=this.technology*0.01-0.5;
@@ -288,7 +299,7 @@ export default class CountryData{
         this.money-=currGDP*this.population;
     }
     /**威望影响军费 */
-    private prestige_ArmyCost():void
+    public prestige_ArmyCost():void
     {
         //军费减少率波动范围 0.0-0.4 公式暂定y=x*0.004,50为分界限
         this.armyPercent=this.prestige*0.004;

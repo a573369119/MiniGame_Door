@@ -55,5 +55,6 @@ export default class Robber extends People{
            if(targetNode !== this.bornNode) break;
        }
         this.setTraget(targetNode);
+        this.cutMoneyTime();
    }
 }

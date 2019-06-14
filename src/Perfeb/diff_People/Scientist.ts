@@ -37,6 +37,7 @@ export default class Scientist extends People{
     /**重写specialdo */
     protected specialDo() : void
     {
-        this.setTraget(this.view.getChildByName("house").getChildByName("technology") as Laya.Sprite);            
+        this.setTraget(this.view.getChildByName("house").getChildByName("technology") as Laya.Sprite);    
+        this.createTechnologyTime();        
     }
 }

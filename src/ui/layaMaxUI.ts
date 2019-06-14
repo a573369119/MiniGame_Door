@@ -21,9 +21,6 @@ export module ui {
 		public ani2:Laya.FrameAnimation;
 		public sp_scene:Laya.Sprite;
 		public sp_ground:Laya.Sprite;
-		public sp_river:Laya.Sprite;
-		public sp_wall:Laya.Sprite;
-		public sp_door:Laya.Sprite;
 		public house:Laya.Sprite;
 		public house_1:Laya.Sprite;
 		public house_2:Laya.Sprite;
@@ -33,7 +30,7 @@ export module ui {
 		public house_6:Laya.Sprite;
 		public house_8:Laya.Sprite;
 		public house_9:Laya.Sprite;
-		public house_10:Laya.Sprite;
+		public eventHouse:Laya.Sprite;
 		public house_11:Laya.Sprite;
 		public house_12:Laya.Sprite;
 		public house_13:Laya.Sprite;
@@ -41,7 +38,6 @@ export module ui {
 		public house_15:Laya.Sprite;
 		public palace:Laya.Sprite;
 		public hospital:Laya.Sprite;
-		public house_16:Laya.Sprite;
 		public house_17:Laya.Sprite;
 		public house_18:Laya.Sprite;
 		public house_19:Laya.Sprite;
@@ -66,6 +62,10 @@ export module ui {
 		public house_36:Laya.Sprite;
 		public house_37:Laya.Sprite;
 		public army:Laya.Sprite;
+		public sp_river:Laya.Sprite;
+		public sp_wall:Laya.Sprite;
+		public sp_door:Laya.Sprite;
+		public clickHouse:Laya.Sprite;
 		public sp_UI:Laya.Sprite;
 		public img_population:Laya.Sprite;
 		public text_count_population:laya.display.Text;

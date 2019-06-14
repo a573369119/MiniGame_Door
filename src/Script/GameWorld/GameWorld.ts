@@ -51,6 +51,7 @@ export default class GameWorld extends ui.GameWorldUI{
         this.screenSetting();//屏幕居中
         this.gameStart();//游戏流程开始
         DataManager.ins_.setArea(this.sp_scene.getChildByName("house"));
+        Laya.timer.loop(1000,this,this.currentRatio);
     }
 
     /**数据初始化 */
@@ -78,7 +79,9 @@ export default class GameWorld extends ui.GameWorldUI{
         this.sp_scene.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
         this.sp_scene.on(Laya.Event.MOUSE_MOVE,this,this.mouseMove);
         //给门帮点点击事   
-        this.sp_door.on(Laya.Event.CLICK,this,this.doorCtr);
+        this.clickHouse.on(Laya.Event.CLICK,this,this.doorCtr);
+        this.clickHouse.on(Laya.Event.MOUSE_OVER,this,this.mouseOver);
+        this.clickHouse.on(Laya.Event.MOUSE_OVER,this,this.mouseOut);
         //医馆事件绑定
         this.hospital.on(Laya.Event.CLICK,this,this.onHouseInfo,[GameConfig.HOSPITAL]);
         //军队事件绑定
@@ -102,6 +105,17 @@ export default class GameWorld extends ui.GameWorldUI{
     }
 
     ///////////////////////////////////////事件回调
+    /**鼠标悬浮 */
+    private mouseOver() : void
+    {
+        this.clickHouse.loadImage("map/doorHouse2.png");
+    }
+
+    /**离开 */
+    private mouseOut() : void
+    {
+        this.clickHouse.loadImage("map/doorHouse.png");
+    }
 
     /**门的开关 */
     private doorCtr() : void
@@ -121,13 +135,13 @@ export default class GameWorld extends ui.GameWorldUI{
     /**关门 */
     private doorClose() : void
     {
-        this.ani1.play(0,false);
+        if(!this.ani1.isPlaying) this.ani1.play(0,false);
     }
 
     /**开门 */
     private doorOpen() : void
     {
-        this.ani2.play(0,false);
+        if(!this.ani2.isPlaying && !this.ani1.isPlaying) this.ani2.play(0,false);
 
     }
 
@@ -171,11 +185,11 @@ export default class GameWorld extends ui.GameWorldUI{
     /**更新UI栏五大主值信息 */
     private updateUIMainData():void
     {
-        this.text_count_population.text=CountryData.ins_.population.toString();
-        this.text_count_popularSupport.text=CountryData.ins_.popularSupport.toString();
-        this.text_count_money.text=CountryData.ins_.money.toString();
-        this.text_count_technology.text=CountryData.ins_.technology.toString();
-        this.text_count_prestige.text=CountryData.ins_.prestige.toString();
+        this.text_count_population.text=Math.ceil(CountryData.ins_.population).toString();
+        this.text_count_popularSupport.text=Math.ceil(CountryData.ins_.popularSupport).toString();
+        this.text_count_money.text=Math.ceil(CountryData.ins_.money).toString();
+        this.text_count_technology.text=Math.ceil(CountryData.ins_.technology).toString();
+        this.text_count_prestige.text=Math.ceil(CountryData.ins_.prestige).toString();
     }
     
 
@@ -191,20 +205,12 @@ export default class GameWorld extends ui.GameWorldUI{
     private gameStart() : void
     {
         this.updateUIMainData();
-        this.peopleManager.createPeople();//人口生成逻辑运行
+        this.peopleManager.openPeopleFactory();//人口生成逻辑运行
         this.peopleManager.createPeople_Inner();//内人口生成
-        //this.openTimer();
-    }
-
-
-    /**开启定时器 */
-    private openTimer():void
-    {
-        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.cal_Money);
-        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.influence_Grain);
-        Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.influence_PopularSupport);
+        CountryData.ins_.openTimer();
         Laya.timer.frameLoop(1,this,this.updateUIMainData);
     }
+
     //////////////////////////////////////////////人口流动通知器
     /**
      * 流动比例， 通知器
@@ -221,7 +227,13 @@ export default class GameWorld extends ui.GameWorldUI{
         let innerTaget = countryData.enterPeople;//进门目标数
         let _outer = countryData._outerPeople;//出城口实际值
         let _inner = countryData._innerPeople;//入城实际值
-        let lastTime = 120000 - this.timerCount - 50000;//获取剩余时间，多预支10秒
+        let lastTime = 120 - this.timerCount - 5;//获取剩余时间，多预支10秒
+
+        console.log("进出比例" + BI);
+        console.log("出门目标数::" + outerTarget  + "  |||  实际出门数：：" + _outer);
+        console.log("进门目标数::" + innerTaget  + "  |||  实际进门数：：" + _inner);
+        console.log("剩下时间：：" + lastTime);
+
         if(outerTarget > _outer)
         {
             //通知
@@ -238,7 +250,7 @@ export default class GameWorld extends ui.GameWorldUI{
             countryData.peopleGoOut(true);
         }
 
-        if(this.timerCount > 120000)
+        if(this.timerCount >= 120)
         {   
             this.timerCount_in = 0;
             this.timerCount_out = 0;

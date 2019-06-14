@@ -56,6 +56,7 @@ export default class Bandit extends People{
            if(targetNode !== this.bornNode) break;
        }
         this.setTraget(targetNode);
+        this.cutMoneyTime();
    }
     
 }

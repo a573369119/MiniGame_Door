@@ -2,6 +2,7 @@ import GameConfig from "../Config/GameConfig";
 import CountryData, { OutCountryData } from "../Core/DataManager";
 import Tool from "../Tool/Tool";
 import DataManager from "../Core/DataManager";
+import PeopleManager from "../Core/PeopleManager";
 
 /**
  * 
@@ -43,6 +44,7 @@ export default class People {
         this.view = view;
         this.isOut = isOut;
         this.type=type;
+        console.log(type);
         this.init(type);
     }
 
@@ -207,16 +209,14 @@ export default class People {
             //城门是否打开
             if(CountryData.ins_.isDoorOpen)
             {
-                this.destoryPeople();
+                this.destoryPeople(true);
                 //城外人口-1
                 OutCountryData.ins_.outCount--;
                 //国家人口+1
                 CountryData.ins_.population++;
-                if(OutCountryData.ins_.outCount<OutCountryData.ins_.maxCount-1)
-                {
-                    let time=Math.random()*3;
-                    Laya.timer.frameOnce(time*60,this,this.createPeople);
-                }
+                CountryData.ins_._innerPeople++;
+                
+                this.peopleInto();
             }
             
         }
@@ -256,8 +256,13 @@ export default class People {
             if(this.targetNode.name === "sp_door")
             {
                 CountryData.ins_.goOut(this.type);
+                this.destoryPeople(true);            
+                this.doorPeople_ToOut();            
             }
-            this.destoryPeople();
+            else
+            {
+                this.destoryPeople();            
+            }
         }
         if(this.sp.x < 0 || this.sp.y > 900 || this.sp.x > 2000) {this.destoryPeople();}
         // console.log(this.sp.rotation);
@@ -415,12 +420,14 @@ export default class People {
     /**门强制出城外 */
     private doorPeople_ToOut():void
     {
+        this.isOut = true;
         Laya.timer.clearAll(this);
         let x=Math.random()*136+932;
         let y=350;
         this.setPos(x,y,this.sp);
         this.dirX=Math.random()*2-1;
         this.dirY=-Math.random()*0.7-0.2;
+        // this.openBehaviour();
         Laya.timer.frameLoop(1,this,this.moveDistance);
         Laya.timer.frameLoop(1,this,this.checkLimit_Out);
     }
@@ -435,10 +442,12 @@ export default class People {
    protected peopleInto() : void
    {
         let bornNode = this.view.getChildByName("sp_door") as Laya.Sprite;
+        this.isOut = false;
         let houseNode = this.view.getChildByName("house");
         let targetNode : Laya.Sprite = this.getTargePos(houseNode);
         this.setPos(bornNode.x,bornNode.y + 40,bornNode);
         this.setTraget(targetNode);
+        this.openBehaviour();
    }
 
    /**从house中获取 一个随机的点 */
@@ -462,12 +471,11 @@ export default class People {
         // this.getTargePos(houseNode);
    }
 
-    /**人消失 */
-    protected destoryPeople() : void
-    {
-        Laya.Pool.recover(this.type,this);        
+    /**人消失 isrecover不回收吗 */
+    protected destoryPeople(notRecover?) : void
+    {   
+        if(!notRecover) Laya.Pool.recover(this.type,this);
         this.sp.visible = false;
-        Laya.Pool.recover(this.type,this);
         Laya.timer.clearAll(this);
         //
         if(!this.isOut) this.destoryInner();

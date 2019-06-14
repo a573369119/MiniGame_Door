@@ -53,7 +53,7 @@ export default class GameConfig {
 
     //----------------------------------时间
     /**五大主值触发时间 */
-    public static TIME_MAINDATA : number = 12*60*60;
+    public static TIME_MAINDATA : number = 0.5*60*60;
     
     //----------------------------------其他
     /**一天时间/分钟 */

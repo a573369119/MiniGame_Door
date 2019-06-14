@@ -53,6 +53,7 @@ P 71542E28 door3.png
 P B731E66B door4.png
 P C22B59F9 door5.png
 P 083BEF0C doorHouse.png
+P 11996816 doorHouse2.png
 P 146C4428 evetHouse.png
 P 55340580 farm.png
 R 6F2EAEED ground.png
@@ -62,11 +63,12 @@ R 3D82C95F palace.png
 P 5F383D74 robber.png
 P A7C28B09 scientist.png
 P BEAA4BE0 star.png
-P 0ECD31C3 tech.png
+P 8A008534 tech.png
 P 48D602D1 tree1.png
 P 763A1F5D tree2.png
 P 3EF77DF1 tree3.png
 R 051A052D wall.png
 R D291430F water.png
+R 2F057E8D 画笔工具.psd
 D unpackage
 P 6D90C530 story.jpg
