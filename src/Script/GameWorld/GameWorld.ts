@@ -193,6 +193,7 @@ export default class GameWorld extends ui.GameWorldUI{
         this.updateUIMainData();
         this.peopleManager.createPeople();//人口生成逻辑运行
         this.peopleManager.createPeople_Inner();//内人口生成
+        //this.openTimer();
     }
 
 
@@ -202,6 +203,7 @@ export default class GameWorld extends ui.GameWorldUI{
         Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.cal_Money);
         Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.influence_Grain);
         Laya.timer.frameLoop(GameConfig.TIME_MAINDATA,this,CountryData.ins_.influence_PopularSupport);
+        Laya.timer.frameLoop(1,this,this.updateUIMainData);
     }
     //////////////////////////////////////////////人口流动通知器
     /**

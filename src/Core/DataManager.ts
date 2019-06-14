@@ -210,8 +210,9 @@ export default class CountryData{
     /**粮食 影响结算*/
     public influence_Grain() : void
     {
-        let grainCost=this.population_GrainCost();
+        let grainMinus=this.population_GrainCost();
         let grainAdd=this.population_GrainAdd();
+        this.cal_Grain(grainAdd,grainMinus);
     }
 
     /**幸福度 影响结算 */
@@ -300,44 +301,44 @@ export default class CountryData{
     }
 
     /**粮食结算 */
-    /*public cal_Grain():void
+    public cal_Grain(grainAdd:number,grainMinus:number):void
     {
         //如果还有粮食库存
-        if(CountryData.ins_.grainAdd>=CountryData.ins_.grainMinus)
+        if(grainAdd>=grainMinus)
         {
             //如果生产量大于大于消耗率的某个倍率，先让其自动转化为财政，之后修改为手动转化
-            if(CountryData.ins_.grainAdd/CountryData.ins_.grainMinus>=GameConfig.GRAIN_EXCHANGEMONEY_PERCENT)
+            if(grainAdd/grainMinus>=GameConfig.GRAIN_EXCHANGEMONEY_PERCENT)
             {
                 //超出倍率的部分
-                let exchange=CountryData.ins_.grainAdd-CountryData.ins_.grainMinus*GameConfig.GRAIN_EXCHANGEMONEY_PERCENT;
-                //换钱
-                this.exchangeMoney(exchange);
+                let exchange=grainAdd-grainMinus*GameConfig.GRAIN_EXCHANGEMONEY_PERCENT;
+                //粮食换钱
+                this.money+=exchange*GameConfig.GRAINTOMONEY;
                 //剩余的加入库存
-                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-exchange-CountryData.ins_.grainMinus);
+                CountryData.ins_.grainStock+=(grainAdd-exchange-grainMinus);
             }
             else
             {
                 //加入库存
-                CountryData.ins_.grainStock+=(CountryData.ins_.grainAdd-CountryData.ins_.grainMinus);
+                CountryData.ins_.grainStock+=(grainAdd-grainMinus);
             }
         }
         else
         {
             //如果库存加上生产的粮食不足以抵够消耗的粮食
-            if((CountryData.ins_.grainStock+CountryData.ins_.grainAdd)<CountryData.ins_.grainMinus)
+            if((CountryData.ins_.grainStock+grainAdd)<grainMinus)
             {
                 //点击选择是否购买粮食，如果不购买则导致人口减少和幸福度降低
-                
+                this.population-=(grainMinus-(CountryData.ins_.grainStock+grainAdd))*1;
+                this.popularSupport-=(grainMinus-(CountryData.ins_.grainStock+grainAdd))*0.001;
             }
             else
             {
                 //减少库存
-                CountryData.ins_.grainStock-=CountryData.ins_.grainMinus-CountryData.ins_.grainAdd;
+                CountryData.ins_.grainStock-=grainMinus-grainAdd;
             }
         }
-    }*/
+    }
 
-    
     /**改变 进、出 目标人数 @isout:是否是出城  @count：改变目标值*/
     public setInOutTarget(isOut,count) : void
     {

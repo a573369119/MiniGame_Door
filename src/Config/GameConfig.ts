@@ -60,6 +60,6 @@ export default class GameConfig {
     public static ONE_DAY:number=10*60;
     /**粮食生产率换钱临界值 */
     public static GRAIN_EXCHANGEMONEY_PERCENT=1.5;
-    /**钱换粮食汇率 */
-    public static MONEYTOGRAIN=2;
+    /**粮食换钱汇率 */
+    public static GRAINTOMONEY=2;
 }
